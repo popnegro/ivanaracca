@@ -33,7 +33,7 @@ export default function Hero() {
           <span className="font-mono text-xs tracking-[0.25em] text-brand-brown uppercase block">
             Atelier Contemporáneo · Mendoza
           </span>
-          
+
           <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-light tracking-tight text-brand-black leading-[1.1]">
             Ivana Racca
           </h1>
@@ -55,7 +55,7 @@ export default function Hero() {
             >
               VER COLECCIÓN
             </a>
-            
+
             <a
               href={getWhatsAppUrl("Hola Ivana, quiero hablar con vos sobre una prenda o diseño.")}
               target="_blank"
@@ -77,7 +77,7 @@ export default function Hero() {
           className="w-full h-full"
         >
           <img
-            src="/src/assets/images/designer_portrait_1784177558478.jpg"
+            src="/src/assets/images/hero.jpeg"
             alt="Ivana Racca trabajando en el modelado tridimensional de un diseño de alta costura"
             className="w-full h-full object-cover grayscale brightness-[0.95]"
             loading="eager"
