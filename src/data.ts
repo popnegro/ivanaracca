@@ -7,7 +7,8 @@ export interface CollectionItem {
   id: string;
   name: string;
   category: string;
-  imageUrl: string;
+  imageUrl?: string;
+  images: string[];
   whatsappMessage: string;
 }
 
@@ -32,29 +33,49 @@ export const COLLECTION_ITEMS: CollectionItem[] = [
     id: "col-1",
     name: "Mono Asimétrico Tierra",
     category: "Alta Costura",
-    imageUrl: "/images/brown_asymmetric_jumpsuit_1784175312134.jpg",
+    imageUrl: "/images/brown-dress.webp",
+    images: [
+      "/images/brown-dress.webp",
+      "/images/brown-dress-cintura.webp",
+      "/images/brown-dress-tela.webp"
+    ],
     whatsappMessage: "Hola Ivana, quiero consultar por el diseño Mono Asimétrico Tierra de la colección."
   },
   {
     id: "col-2",
-    name: "Vestido Gala Prisma",
+    name: "Vestido Rainbow",
     category: "Alta Costura",
-    imageUrl: "/images/rainbow_silk_gown_1784175325434.jpg",
-    whatsappMessage: "Hola Ivana, quiero consultar por el diseño Vestido Gala Prisma de la colección."
+    imageUrl: "/images/rainbow-dress.webp",
+    images: [
+      "/images/rainbow-dress.webp",
+      "/images/rainbow-dress-caida.webp",
+      "/images/rainbow-dress-tela.webp"
+    ],
+    whatsappMessage: "Hola Ivana, quiero consultar por el diseño Vestido Rainbow de la colección."
   },
   {
     id: "col-3",
-    name: "Saco Sastre Lino",
+    name: "Vestido Plateado",
     category: "Alta Costura",
-    imageUrl: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80",
-    whatsappMessage: "Hola Ivana, quiero consultar por el diseño Saco Sastre Lino de la colección."
+    imageUrl: "/images/plate-dress-laturca.webp",
+    images: [
+      "/images/plate-dress-laturca.webp",
+      "/images/ana-laura-turca-nicoletti-plate-dress-up.webp",
+      "/images/ana-laura-turca-nicoletti-plate-dress-down.webp"
+    ],
+    whatsappMessage: "Hola Ivana, quiero consultar por el diseño Vestido Plateado de la colección."
   },
   {
     id: "col-4",
-    name: "Vestido Corte Líquido",
+    name: "Vestido Negro",
     category: "Alta Costura",
-    imageUrl: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80",
-    whatsappMessage: "Hola Ivana, quiero consultar por el diseño Vestido Corte Líquido de la colección."
+    imageUrl: "/images/ana-laura-turca-nicoletti-black-dress.webp",
+    images: [
+      "/images/ana-laura-turca-nicoletti-black-dress.webp",
+      "/images/ana-laura-turca-nicoletti-black-dress-espalda.webp",
+      "/images/ana-laura-turca-nicoletti-black-dress-escote.webp"
+    ],
+    whatsappMessage: "Hola Ivana, quiero consultar por el diseño Vestido Negro de la colección."
   }
 ];
 
@@ -92,21 +113,21 @@ export const SERVICES: ServiceItem[] = [
 export const CATALOG_ITEMS: CatalogItem[] = [
   {
     id: "cat-1",
-    name: "TRUCADORAS",
+    name: "Trucadoras",
     description: "Prendas interiores pensadas para acompañar, sostener y transformar la forma de vestir.",
     imageUrl: "/images/trucadoras.webp",
     whatsappMessage: "Hola Ivana, quiero consultar por trucadoras."
   },
   {
     id: "cat-2",
-    name: "SUSPENSORES",
+    name: "Suspensores",
     description: "Diseño, funcionalidad y ajuste en una pieza pensada para el uso cotidiano.",
     imageUrl: "/images/suspensores.webp",
     whatsappMessage: "Hola Ivana, quiero consultar por suspensores."
   },
   {
     id: "cat-3",
-    name: "ROPA INTERIOR",
+    name: "Ropa interior",
     description: "Talles exclusivos o especiales, confeccionados para necesidades que no siempre encuentran respuesta en las medidas convencionales.",
     imageUrl: "/images/ropa-interior-inclusiva.webp",
     whatsappMessage: "Hola Ivana, quiero consultar por ropa interior en talles exclusivos o especiales."

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu } from 'lucide-react';
 import MobileMenu from './MobileMenu';
 import { getWhatsAppUrl } from '../utils/whatsapp';
+import { trackWhatsAppClick } from '../utils/analytics';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -58,7 +59,7 @@ export default function Header() {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="font-serif text-xl md:text-2xl font-light tracking-[0.2em] text-brand-black hover:text-brand-brown transition-colors"
+            className="font-serif text-xl md:text-2xl font-bold tracking-[0.2em] text-brand-black hover:text-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-colors"
           >
             IVANA RACCA
           </a>
@@ -70,7 +71,7 @@ export default function Header() {
                 key={link.label}
                 href={link.href}
                 onClick={(e) => handleSmoothScroll(e, link.href)}
-                className="font-sans text-xs font-medium tracking-[0.15em] text-brand-black/80 hover:text-brand-brown transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-brand-brown hover:after:w-full after:transition-all after:duration-300"
+                className="font-sans text-xs font-medium tracking-[0.15em] text-brand-black/80 hover:text-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-brand-brown hover:after:w-full after:transition-all after:duration-300"
               >
                 {link.label}
               </a>
@@ -83,7 +84,8 @@ export default function Header() {
               href={getWhatsAppUrl("Hola Ivana, me gustaría hablar sobre un diseño o prenda.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-2.5 border border-brand-black text-brand-black hover:bg-brand-black hover:text-brand-white transition-all font-mono text-xs uppercase tracking-widest"
+              onClick={() => trackWhatsAppClick('header_nav', 'Hola Ivana, me gustaría hablar sobre un diseño o prenda.')}
+              className="px-5 py-2.5 border border-brand-black text-brand-black hover:bg-brand-black hover:text-brand-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-all font-mono text-xs uppercase tracking-widest"
             >
               [ HABLAR CON IVANA ]
             </a>
@@ -94,8 +96,8 @@ export default function Header() {
             onClick={() => setMobileMenuOpen(true)}
             aria-label="Abrir menú de navegación"
             aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-menu-drawer"
-            className="md:hidden p-2 text-brand-black hover:text-brand-brown focus:outline-none"
+            aria-controls="mobile-menu"
+            className="md:hidden p-2 text-brand-black hover:text-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 rounded-xs transition-colors"
           >
             <Menu className="w-6 h-6" />
           </button>

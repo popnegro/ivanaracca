@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Atelier from './components/Atelier';
@@ -8,7 +8,17 @@ import Catalog from './components/Catalog';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
-import { GraciasView, PendienteView, ErrorView } from './components/OrderReceipts';
+
+// Code splitting: Lazy load order/payment receipt views to keep main bundle lean
+const GraciasView = lazy(() =>
+  import('./components/OrderReceipts').then((module) => ({ default: module.GraciasView }))
+);
+const PendienteView = lazy(() =>
+  import('./components/OrderReceipts').then((module) => ({ default: module.PendienteView }))
+);
+const ErrorView = lazy(() =>
+  import('./components/OrderReceipts').then((module) => ({ default: module.ErrorView }))
+);
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -37,21 +47,31 @@ export default function App() {
 
   if (isGraciasPage) {
     return (
-      <GraciasView
-        paymentId={searchParams.get('payment_id')}
-        preferenceId={searchParams.get('preference_id')}
-        externalReference={searchParams.get('external_reference')}
-        onGoHome={handleGoHome}
-      />
+      <Suspense fallback={<div className="min-h-screen bg-brand-ivory" />}>
+        <GraciasView
+          paymentId={searchParams.get('payment_id')}
+          preferenceId={searchParams.get('preference_id')}
+          externalReference={searchParams.get('external_reference')}
+          onGoHome={handleGoHome}
+        />
+      </Suspense>
     );
   }
 
   if (isPendingPage) {
-    return <PendienteView onGoHome={handleGoHome} />;
+    return (
+      <Suspense fallback={<div className="min-h-screen bg-brand-ivory" />}>
+        <PendienteView onGoHome={handleGoHome} />
+      </Suspense>
+    );
   }
 
   if (isErrorPage) {
-    return <ErrorView onGoHome={handleGoHome} />;
+    return (
+      <Suspense fallback={<div className="min-h-screen bg-brand-ivory" />}>
+        <ErrorView onGoHome={handleGoHome} />
+      </Suspense>
+    );
   }
 
   return (

@@ -1,7 +1,10 @@
 import React from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import SectionHeader from './SectionHeader';
 
 export default function Atelier() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section id="atelier" className="py-20 md:py-32 bg-brand-white border-b border-brand-brown/10">
       <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-20">
@@ -14,7 +17,13 @@ export default function Atelier() {
               title="Ivana Racca"
             />
 
-            <div className="space-y-6 text-brand-black/80 font-serif text-lg leading-relaxed max-w-xl">
+            <motion.div 
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: shouldReduceMotion ? 0 : 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-6 text-brand-black/80 font-serif text-lg leading-relaxed max-w-xl"
+            >
               <p className="font-semibold text-brand-brown">
                 El oficio empieza mucho antes de la máquina de coser:
                 empieza mirando, imaginando y entendiendo cada cuerpo.
@@ -39,11 +48,17 @@ export default function Atelier() {
               <p className="font-medium">
                 Diseño, técnica y oficio para crear prendas con identidad propia.
               </p>
-            </div>
+            </motion.div>
           </div>
 
           {/* Right Column (Image) on desktop, top on mobile */}
-          <div className="w-full md:w-1/2 order-1 md:order-2">
+          <motion.div 
+            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.97 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full md:w-1/2 order-1 md:order-2"
+          >
             <div className="aspect-[3/4] w-full max-w-md mx-auto overflow-hidden bg-brand-ivory border border-brand-brown/10 shadow-xs">
               <img
                 src="/images/ivana-racca-atelier.webp"
@@ -52,7 +67,7 @@ export default function Atelier() {
                 loading="lazy"
               />
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

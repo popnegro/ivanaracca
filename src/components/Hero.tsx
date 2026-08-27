@@ -1,11 +1,15 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { getWhatsAppUrl } from '../utils/whatsapp';
+import { trackWhatsAppClick, trackCtaClick } from '../utils/analytics';
 import ImageCarousel from './ImageCarousel';
 
 export default function Hero() {
+  const shouldReduceMotion = useReducedMotion();
+
   const handleScrollToCollection = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    trackCtaClick('ver_coleccion', 'hero');
     const element = document.querySelector('#coleccion');
     if (element) {
       const offset = 80;
@@ -22,13 +26,13 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-[90vh] md:min-h-screen flex flex-col md:flex-row items-center justify-between pt-24 md:pt-0 overflow-hidden bg-brand-ivory">
+    <section className="relative min-h-[90vh] md:min-h-screen flex flex-col md:flex-row items-center justify-between pt-24 md:pt-18 pb-0 md:pb-16 overflow-hidden bg-brand-ivory">
       {/* Editorial Content - Left Side */}
       <div className="w-full md:w-1/2 px-6 md:px-12 lg:px-20 py-10 md:py-0 flex flex-col justify-center z-10">
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: 'easeOut' }}
           className="space-y-6"
         >
           <span className="font-mono text-xs tracking-[0.25em] text-brand-brown uppercase block">
@@ -36,10 +40,10 @@ export default function Hero() {
           </span>
 
           <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-light tracking-tight text-brand-black leading-[1.1]">
-            Alta Costura & Modista
+            Alta Costura y Confección
           </h1>
 
-          <p className="font-serif text-lg sm:text-xl md:text-2xl italic text-brand-brown font-normal">
+          <p className="font-serif text-lg sm:text-2xl md:text-2xl italic text-brand-brown font-normal">
             Trucadoras · Suspensores · Ropa Interior
           </p>
 
@@ -48,7 +52,7 @@ export default function Hero() {
             <a
               href="#coleccion"
               onClick={handleScrollToCollection}
-              className="px-8 py-4 bg-brand-black text-brand-white hover:bg-brand-brown transition-all font-mono text-xs uppercase tracking-widest text-center"
+              className="px-8 py-4 bg-brand-black text-brand-white hover:bg-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-all font-mono text-xs uppercase tracking-widest text-center"
             >
               VER COLECCIÓN
             </a>
@@ -57,7 +61,8 @@ export default function Hero() {
               href={getWhatsAppUrl("Hola Ivana, quiero hablar con vos sobre una prenda o diseño.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 border border-brand-black text-brand-black hover:bg-brand-black hover:text-brand-white transition-all font-mono text-xs uppercase tracking-widest text-center"
+              onClick={() => trackWhatsAppClick('hero_primary', 'Hola Ivana, quiero hablar con vos sobre una prenda o diseño.')}
+              className="px-8 py-4 border border-brand-black text-brand-black hover:bg-brand-black hover:text-brand-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-all font-mono text-xs uppercase tracking-widest text-center"
             >
               HABLAR CON IVANA
             </a>
@@ -66,7 +71,7 @@ export default function Hero() {
       </div>
 
       {/* Editorial Image - Right Side */}
-      <div className="w-full md:w-1/2 h-[50vh] md:h-screen relative overflow-hidden">
+      <div className="w-full md:w-1/2 flex items-center justify-center px-0 md:px-6 lg:px-12 pt-6 pb-0 md:py-12 z-10">
         <ImageCarousel />
       </div>
     </section>
