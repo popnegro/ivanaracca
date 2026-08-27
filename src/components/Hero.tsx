@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { getWhatsAppUrl } from '../utils/whatsapp';
+import ImageCarousel from './ImageCarousel';
 
 export default function Hero() {
   const handleScrollToCollection = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -70,20 +71,7 @@ export default function Hero() {
 
       {/* Editorial Image - Right Side */}
       <div className="w-full md:w-1/2 h-[50vh] md:h-screen relative overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.2, delay: 0.2 }}
-          className="w-full h-full"
-        >
-          <img
-            src="/src/assets/images/hero.jpeg"
-            alt="Ivana Racca trabajando en el modelado tridimensional de un diseño de alta costura"
-            className="w-full h-full object-cover grayscale brightness-[0.95]"
-            loading="eager"
-            fetchPriority="high"
-          />
-        </motion.div>
+        <ImageCarousel />
       </div>
     </section>
   );
