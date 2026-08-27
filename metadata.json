@@ -1,0 +1,6 @@
+{
+  "name": "Ivana Racca",
+  "description": "One Page Premium y Tienda Editorial para Diseñadora de Alta Moda, con integración fluida de Mercado Pago, catálogo asimétrico y estética de lujo silencioso.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
