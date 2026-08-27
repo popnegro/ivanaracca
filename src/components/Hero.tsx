@@ -32,21 +32,17 @@ export default function Hero() {
           className="space-y-6"
         >
           <span className="font-mono text-xs tracking-[0.25em] text-brand-brown uppercase block">
-            Atelier Contemporáneo · Mendoza
+            Maipú · Mendoza
           </span>
 
           <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-light tracking-tight text-brand-black leading-[1.1]">
-            Ivana Racca
+            Alta Costura & Modista
           </h1>
 
-          <p className="font-serif text-lg sm:text-xl md:text-2xl italic text-brand-brown font-light">
-            Alta Costura · Diseño de Autor · Modista
+          <p className="font-serif text-lg sm:text-xl md:text-2xl italic text-brand-brown font-normal">
+            Trucadoras · Suspensores · Ropa Interior
           </p>
 
-          <div className="border-l border-brand-brown/30 pl-4 py-1 text-brand-black/80 font-serif text-base sm:text-lg italic leading-relaxed space-y-1">
-            <p>Diseñar es imaginar una forma.</p>
-            <p>Confeccionar es hacerla realidad.</p>
-          </div>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <a

@@ -7,7 +7,7 @@ export default function Collection() {
   return (
     <section id="coleccion" className="py-20 md:py-32 bg-brand-ivory border-b border-brand-brown/10">
       <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-20 space-y-16">
-        
+
         {/* Section Header */}
         <SectionHeader
           label="COLECCIÓN"
@@ -23,7 +23,7 @@ export default function Collection() {
             // Item 2: wide (7 cols)    | Item 3: narrow (5 cols)
             const isEvenPair = Math.floor(index / 2) % 2 === 0;
             const isLeft = index % 2 === 0;
-            
+
             let colSpan = "col-span-12 ";
             if (isEvenPair) {
               colSpan += isLeft ? "md:col-span-5" : "md:col-span-7";
@@ -35,8 +35,8 @@ export default function Collection() {
             const alignmentClass = isLeft ? "md:mt-0" : "md:mt-12";
 
             return (
-              <div 
-                key={item.id} 
+              <div
+                key={item.id}
                 className={`${colSpan} ${alignmentClass} group space-y-4`}
               >
                 {/* Image Wrapper */}
@@ -44,7 +44,7 @@ export default function Collection() {
                   <img
                     src={item.imageUrl}
                     alt={`${item.name} - Alta Costura por Ivana Racca`}
-                    className="w-full h-full object-cover grayscale transition-transform duration-1000 group-hover:scale-[1.03] group-hover:grayscale-0"
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.03] group-hover:grayscale-0"
                     loading="lazy"
                   />
                 </div>
@@ -59,7 +59,7 @@ export default function Collection() {
                       {item.category}
                     </p>
                   </div>
-                  
+
                   <a
                     href={getWhatsAppUrl(item.whatsappMessage)}
                     target="_blank"

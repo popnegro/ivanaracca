@@ -46,7 +46,7 @@ export default function Atelier() {
           <div className="w-full md:w-1/2 order-1 md:order-2">
             <div className="aspect-[3/4] w-full max-w-md mx-auto overflow-hidden bg-brand-ivory border border-brand-brown/10 shadow-xs">
               <img
-                src="/src/assets/images/hero.jpeg"
+                src="/src/assets/images/ivana-racca-atelier.webp"
                 alt="Retrato de Ivana Racca en su taller, trabajando en un diseño a medida"
                 className="w-full h-full object-cover grayscale transition-transform duration-700 hover:scale-102"
                 loading="lazy"

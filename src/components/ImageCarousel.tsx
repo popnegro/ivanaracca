@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'motion/react';
 
 // Paths to existing images in the project assets
 const images = [
-  '/src/assets/images/hero.jpeg',
-  '/src/assets/images/designer_portrait_3_4_1784177751103.jpg',
+  '/src/assets/images/ana-laura-turca-nicoletti-plate-dress-up.webp',
+  '/src/assets/images/ana-laura-turca-nicoletti-black-dress.webp',
 ];
 
 /**
@@ -29,7 +29,7 @@ export default function ImageCarousel() {
           key={current}
           src={images[current]}
           alt="Hero carousel image"
-          className="absolute inset-0 w-full h-full object-cover grayscale"
+          className="absolute inset-0 w-full h-full object-cover"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
