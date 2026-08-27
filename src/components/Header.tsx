@@ -93,6 +93,8 @@ export default function Header() {
           <button
             onClick={() => setMobileMenuOpen(true)}
             aria-label="Abrir menú de navegación"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu-drawer"
             className="md:hidden p-2 text-brand-black hover:text-brand-brown focus:outline-none"
           >
             <Menu className="w-6 h-6" />

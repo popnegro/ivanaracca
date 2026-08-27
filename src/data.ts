@@ -94,21 +94,21 @@ export const CATALOG_ITEMS: CatalogItem[] = [
     id: "cat-1",
     name: "TRUCADORAS",
     description: "Prendas interiores pensadas para acompañar, sostener y transformar la forma de vestir.",
-    imageUrl: "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/images/trucadoras.webp",
     whatsappMessage: "Hola Ivana, quiero consultar por trucadoras."
   },
   {
     id: "cat-2",
     name: "SUSPENSORES",
     description: "Diseño, funcionalidad y ajuste en una pieza pensada para el uso cotidiano.",
-    imageUrl: "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/images/suspensores.webp",
     whatsappMessage: "Hola Ivana, quiero consultar por suspensores."
   },
   {
     id: "cat-3",
     name: "ROPA INTERIOR",
     description: "Talles exclusivos o especiales, confeccionados para necesidades que no siempre encuentran respuesta en las medidas convencionales.",
-    imageUrl: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80",
+    imageUrl: "/images/ropa-interior-inclusiva.webp",
     whatsappMessage: "Hola Ivana, quiero consultar por ropa interior en talles exclusivos o especiales."
   }
 ];

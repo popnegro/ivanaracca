@@ -64,6 +64,7 @@ export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProp
 
           {/* Drawer Menu */}
           <motion.div
+            id="mobile-menu-drawer"
             role="dialog"
             aria-modal="true"
             aria-label="Menú de Navegación"
