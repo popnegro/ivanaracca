@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'motion/react';
 
 // Paths to existing images in the project assets
 const images = [
-  '/src/assets/images/ana-laura-turca-nicoletti-plate-dress-up.webp',
-  '/src/assets/images/ana-laura-turca-nicoletti-black-dress.webp',
+  '/images/ana-laura-turca-nicoletti-plate-dress-up.webp',
+  '/images/ana-laura-turca-nicoletti-black-dress.webp',
 ];
 
 /**

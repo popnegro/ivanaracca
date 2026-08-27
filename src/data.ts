@@ -32,14 +32,14 @@ export const COLLECTION_ITEMS: CollectionItem[] = [
     id: "col-1",
     name: "Mono Asimétrico Tierra",
     category: "Alta Costura",
-    imageUrl: "/src/assets/images/brown_asymmetric_jumpsuit_1784175312134.jpg",
+    imageUrl: "/images/brown_asymmetric_jumpsuit_1784175312134.jpg",
     whatsappMessage: "Hola Ivana, quiero consultar por el diseño Mono Asimétrico Tierra de la colección."
   },
   {
     id: "col-2",
     name: "Vestido Gala Prisma",
     category: "Alta Costura",
-    imageUrl: "/src/assets/images/rainbow_silk_gown_1784175325434.jpg",
+    imageUrl: "/images/rainbow_silk_gown_1784175325434.jpg",
     whatsappMessage: "Hola Ivana, quiero consultar por el diseño Vestido Gala Prisma de la colección."
   },
   {
