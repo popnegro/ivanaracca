@@ -5,12 +5,11 @@ import { CATALOG_ITEMS } from '../data';
 import { getWhatsAppUrl } from '../utils/whatsapp';
 import { trackCatalogInquiry, trackEvent } from '../utils/analytics';
 import { applyPageMeta, injectJsonLd, removeJsonLd } from '../utils/seo';
+import { buildProductPageGraph } from '../utils/schema';
 import { navigate } from '../utils/navigation';
 import Header from './Header';
 import Footer from './Footer';
 import WhatsAppButton from './WhatsAppButton';
-
-const SITE = 'https://ivanaracca.vercel.app';
 
 type Props = {
   product: CatalogItem;
@@ -30,80 +29,7 @@ export default function ProductPage({ product }: Props) {
       imageAlt: `${product.name} — Ivana Racca, Maipú Mendoza`,
     });
 
-    const pageUrl = `${SITE}/catalogo/${product.slug}`;
-
-    injectJsonLd('product-page-jsonld', {
-      '@context': 'https://schema.org',
-      '@graph': [
-        {
-          '@type': 'BreadcrumbList',
-          '@id': `${pageUrl}#breadcrumb`,
-          itemListElement: [
-            {
-              '@type': 'ListItem',
-              position: 1,
-              name: 'Inicio',
-              item: `${SITE}/`,
-            },
-            {
-              '@type': 'ListItem',
-              position: 2,
-              name: 'Catálogo',
-              item: `${SITE}/#catalogo`,
-            },
-            {
-              '@type': 'ListItem',
-              position: 3,
-              name: product.name,
-              item: pageUrl,
-            },
-          ],
-        },
-        {
-          '@type': 'Product',
-          '@id': `${pageUrl}#product`,
-          name: product.name,
-          description: product.longDescription,
-          image: `${SITE}${product.imageUrl}`,
-          brand: {
-            '@type': 'Brand',
-            name: 'Ivana Racca',
-          },
-          category: 'Apparel & Accessories > Clothing > Underwear & Socks',
-          offers: {
-            '@type': 'Offer',
-            url: pageUrl,
-            priceCurrency: 'ARS',
-            availability: 'https://schema.org/LimitedAvailability',
-            seller: {
-              '@type': 'LocalBusiness',
-              name: 'Ivana Racca — Atelier',
-              address: {
-                '@type': 'PostalAddress',
-                streetAddress: 'Canal de Beagle 2520',
-                addressLocality: 'Maipú',
-                addressRegion: 'Mendoza',
-                postalCode: '5514',
-                addressCountry: 'AR',
-              },
-            },
-          },
-        },
-        {
-          '@type': 'FAQPage',
-          '@id': `${pageUrl}#faq`,
-          mainEntity: product.faqs.map((f, i) => ({
-            '@type': 'Question',
-            '@id': `${pageUrl}#faq-${i + 1}`,
-            name: f.question,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: f.answer,
-            },
-          })),
-        },
-      ],
-    });
+    injectJsonLd('product-page-jsonld', buildProductPageGraph(product));
 
     trackEvent('view_item', {
       item_id: product.id,
@@ -132,7 +58,6 @@ export default function ProductPage({ product }: Props) {
       <Header />
 
       <main className="pb-24 md:pb-0">
-        {/* Breadcrumb */}
         <nav
           aria-label="Miga de pan"
           className="max-w-7xl mx-auto px-6 md:px-10 lg:px-20 pt-28 md:pt-32 pb-6"
@@ -171,7 +96,6 @@ export default function ProductPage({ product }: Props) {
           </ol>
         </nav>
 
-        {/* Hero product */}
         <section className="max-w-7xl mx-auto px-6 md:px-10 lg:px-20 pb-16 md:pb-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
             <motion.div
@@ -240,7 +164,6 @@ export default function ProductPage({ product }: Props) {
           </div>
         </section>
 
-        {/* Long copy + benefits */}
         <section className="border-y border-brand-brown/10 bg-brand-white">
           <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-20 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
             <div className="space-y-6">
@@ -269,7 +192,6 @@ export default function ProductPage({ product }: Props) {
           </div>
         </section>
 
-        {/* Process */}
         <section className="max-w-7xl mx-auto px-6 md:px-10 lg:px-20 py-16 md:py-24">
           <h2 className="font-serif text-2xl md:text-3xl font-light mb-10">Cómo funciona</h2>
           <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -295,7 +217,6 @@ export default function ProductPage({ product }: Props) {
           </div>
         </section>
 
-        {/* FAQ */}
         <section
           className="border-t border-brand-brown/10 bg-brand-ivory"
           aria-labelledby="product-faq-heading"
@@ -334,7 +255,6 @@ export default function ProductPage({ product }: Props) {
           </div>
         </section>
 
-        {/* Related */}
         {related.length > 0 && (
           <section className="max-w-7xl mx-auto px-6 md:px-10 lg:px-20 py-16 md:py-24 border-t border-brand-brown/10">
             <h2 className="font-serif text-2xl md:text-3xl font-light mb-10">También en el catálogo</h2>
@@ -372,7 +292,6 @@ export default function ProductPage({ product }: Props) {
         )}
       </main>
 
-      {/* Mobile sticky CTA */}
       <div className="fixed bottom-0 inset-x-0 z-40 md:hidden border-t border-brand-brown/15 bg-brand-ivory/95 backdrop-blur-sm p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
         <a
           href={waHref}
