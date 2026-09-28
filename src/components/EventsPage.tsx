@@ -26,9 +26,23 @@ export default function EventsPage() {
       description:
         'Diseños de Ivana Racca para Ana Laura Nicoletti, archivo de eventos y notas periodísticas. Atelier en Maipú, Mendoza.',
       canonicalPath: '/eventos',
-      imagePath: EVENT_ITEMS[0]?.images[0] || '/images/og-image.webp',
+      imagePath: '/images/og-image.webp',
       imageAlt: 'Eventos — diseños Ivana Racca',
     });
+
+    const eventWorks = EVENT_ITEMS.map((item, index) => ({
+      '@type': 'CreativeWork',
+      '@id': `${SITE}/eventos#${item.id}`,
+      name: item.title,
+      description: item.summary,
+      creator: { '@id': `${SITE}/#ivana-racca` },
+      contributor: { '@type': 'Person', name: item.featuredPerson },
+      image: item.images.map((image) => `${SITE}${image}`),
+      dateCreated: item.date,
+      creditText: item.credits,
+      about: ['vestuario escénico', item.pieceName, item.featuredPerson],
+      position: index + 1,
+    }));
 
     injectJsonLd('eventos-page-jsonld', {
       '@context': 'https://schema.org',
@@ -41,8 +55,23 @@ export default function EventsPage() {
           description:
             'Diseños para Ana Laura Nicoletti y notas periodísticas sobre Ivana Racca, atelier en Maipú, Mendoza.',
           isPartOf: { '@id': `${SITE}/#website` },
+          about: { '@id': `${SITE}/#ivana-racca` },
+          author: { '@id': `${SITE}/#ivana-racca` },
           inLanguage: 'es-AR',
+          mainEntity: {
+            '@type': 'ItemList',
+            '@id': `${SITE}/eventos#archivo`,
+            name: 'Archivo de diseños para escena',
+            numberOfItems: eventWorks.length,
+            itemListElement: eventWorks.map((work, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              item: { '@id': work['@id'] },
+            })),
+          },
+          citation: PRESS_ITEMS.map((note) => note.url),
         },
+        ...eventWorks,
         {
           '@type': 'BreadcrumbList',
           itemListElement: [
