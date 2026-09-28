@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import { useReducedMotion } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const carouselImages = [
@@ -53,7 +53,6 @@ export default function ImageCarousel() {
     setCurrent(index);
   }, []);
 
-  // Autoplay only when motion is allowed and not paused by user
   useEffect(() => {
     if (isPaused || !hasMultiple || shouldReduceMotion) return;
     const interval = setInterval(() => {
@@ -117,8 +116,6 @@ export default function ImageCarousel() {
     setLoadedImages((prev) => ({ ...prev, [index]: true }));
   };
 
-  const activeItem = carouselImages[current];
-
   return (
     <div
       role="region"
@@ -136,33 +133,36 @@ export default function ImageCarousel() {
       onBlur={() => setIsPaused(false)}
       className="relative aspect-square w-full md:w-4/5 md:max-w-[80%] mx-auto overflow-hidden bg-brand-ivory/60 border-y md:border border-brand-brown/15 shadow-xl select-none group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2"
     >
-      {!loadedImages[current] && (
-        <div className="absolute inset-0 bg-brand-ivory animate-pulse z-0 flex items-center justify-center">
-          <span className="font-mono text-xs uppercase tracking-widest text-brand-brown/40">
-            Cargando...
-          </span>
-        </div>
-      )}
+      {/*
+        LCP: todas las slides como <img> nativas apiladas.
+        La slide 0 no usa Motion ni opacity:0 inicial → menos element render delay.
+      */}
+      {carouselImages.map((item, idx) => {
+        const isActive = idx === current;
+        const isLcp = idx === 0;
 
-      <AnimatePresence mode="wait">
-        <motion.img
-          key={current}
-          src={activeItem.src}
-          alt={activeItem.alt}
-          className={`absolute inset-0 w-full h-full object-cover ${shouldReduceMotion ? '' : 'transition-transform duration-700 group-hover:scale-[1.02]'} ${
-            loadedImages[current] ? 'opacity-100' : 'opacity-0'
-          }`}
-          loading={current === 0 ? 'eager' : 'lazy'}
-          fetchPriority={current === 0 ? 'high' : 'auto'}
-          decoding="async"
-          referrerPolicy="no-referrer"
-          onLoad={() => handleImageLoad(current)}
-          initial={{ opacity: shouldReduceMotion ? 1 : 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: shouldReduceMotion ? 1 : 0 }}
-          transition={{ duration: shouldReduceMotion ? 0 : 0.4 }}
-        />
-      </AnimatePresence>
+        return (
+          <img
+            key={item.src}
+            src={item.src}
+            alt={item.alt}
+            className={`absolute inset-0 w-full h-full object-cover ${
+              shouldReduceMotion ? '' : 'transition-opacity duration-300'
+            } ${
+              isActive && loadedImages[idx] ? 'opacity-100' : 'opacity-0'
+            } ${!shouldReduceMotion && isActive ? 'group-hover:scale-[1.02] transition-transform duration-700' : ''}`}
+            style={isLcp && isActive ? { opacity: 1 } : undefined}
+            loading={isLcp ? 'eager' : 'lazy'}
+            fetchPriority={isLcp ? 'high' : 'auto'}
+            decoding={isLcp ? 'sync' : 'async'}
+            referrerPolicy="no-referrer"
+            width={896}
+            height={892}
+            onLoad={() => handleImageLoad(idx)}
+            aria-hidden={!isActive}
+          />
+        );
+      })}
 
       {hasMultiple && (
         <div className="absolute top-3 right-3 flex items-center pointer-events-none z-10">
@@ -178,25 +178,25 @@ export default function ImageCarousel() {
             type="button"
             onClick={handlePrev}
             aria-label="Foto anterior del carousel"
-            className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-9 md:h-9 bg-brand-black/70 hover:bg-brand-black text-brand-white rounded-full flex items-center justify-center shadow-md backdrop-blur-xs opacity-90 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black"
+            className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 md:w-10 md:h-10 bg-brand-black/70 hover:bg-brand-black text-brand-white rounded-full flex items-center justify-center shadow-md backdrop-blur-xs opacity-90 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black"
           >
-            <ChevronLeft className="w-4 h-4 md:w-5 md:h-5 stroke-[2]" />
+            <ChevronLeft className="w-5 h-5 stroke-[2]" />
           </button>
 
           <button
             type="button"
             onClick={handleNext}
             aria-label="Siguiente foto del carousel"
-            className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-9 md:h-9 bg-brand-black/70 hover:bg-brand-black text-brand-white rounded-full flex items-center justify-center shadow-md backdrop-blur-xs opacity-90 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black"
+            className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 md:w-10 md:h-10 bg-brand-black/70 hover:bg-brand-black text-brand-white rounded-full flex items-center justify-center shadow-md backdrop-blur-xs opacity-90 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black"
           >
-            <ChevronRight className="w-4 h-4 md:w-5 md:h-5 stroke-[2]" />
+            <ChevronRight className="w-5 h-5 stroke-[2]" />
           </button>
         </>
       )}
 
       {hasMultiple && (
         <div
-          className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 px-2.5 py-1 bg-brand-black/60 rounded-full flex items-center gap-1.5 backdrop-blur-xs"
+          className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 flex items-center gap-0 backdrop-blur-xs bg-brand-black/50 rounded-full px-1"
           role="tablist"
           aria-label="Indicadores de fotos del carousel"
         >
@@ -210,12 +210,17 @@ export default function ImageCarousel() {
                 aria-selected={isActive}
                 aria-label={`Ir a foto ${idx + 1} de ${totalSlides}`}
                 onClick={(e) => handleGoTo(idx, e)}
-                className={`transition-all duration-200 rounded-full focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-white ${
-                  isActive
-                    ? 'w-4 h-1.5 bg-brand-white'
-                    : 'w-1.5 h-1.5 bg-brand-white/50 hover:bg-brand-white/80'
-                }`}
-              />
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-white rounded-full"
+              >
+                <span
+                  className={`block rounded-full transition-all duration-200 ${
+                    isActive
+                      ? 'w-4 h-1.5 bg-brand-white'
+                      : 'w-1.5 h-1.5 bg-brand-white/50'
+                  }`}
+                  aria-hidden="true"
+                />
+              </button>
             );
           })}
         </div>
