@@ -227,7 +227,7 @@ export function getServerPageSeo(pathname: string): ServerPageSeo {
       description:
         'Diseños de Ivana Racca para Ana Laura Nicoletti, archivo de eventos y notas periodísticas. Atelier en Maipú, Mendoza.',
       canonicalPath: '/eventos',
-      imagePath: EVENT_ITEMS[0]?.images[0] || DEFAULT_OG_IMAGE,
+      imagePath: DEFAULT_OG_IMAGE,
       imageAlt: 'Eventos — diseños Ivana Racca',
       jsonLd: eventsGraph(),
     };
