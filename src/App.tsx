@@ -10,8 +10,9 @@ import Faq from './components/Faq';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
+import { getCatalogBySlug } from './data';
+import { applyPageMeta } from './utils/seo';
 
-// Code splitting: Lazy load order/payment receipt views to keep main bundle lean
 const GraciasView = lazy(() =>
   import('./components/OrderReceipts').then((module) => ({ default: module.GraciasView }))
 );
@@ -21,6 +22,38 @@ const PendienteView = lazy(() =>
 const ErrorView = lazy(() =>
   import('./components/OrderReceipts').then((module) => ({ default: module.ErrorView }))
 );
+const ProductPage = lazy(() => import('./components/ProductPage'));
+
+function HomePage() {
+  useEffect(() => {
+    applyPageMeta({
+      title: 'Ivana Racca | Alta Costura y Modista en Maipú, Mendoza',
+      description:
+        'Ivana Racca, diseñadora y modista en Maipú, Mendoza. Alta costura, confección a medida, ajustes, transformaciones, vestuario y ropa interior en talles exclusivos o especiales.',
+      canonicalPath: '/',
+      imagePath: '/images/og-image.webp',
+      imageAlt: 'Ivana Racca — Alta Costura y Diseño de Autor en Mendoza',
+    });
+  }, []);
+
+  return (
+    <div className="relative min-h-screen bg-brand-ivory text-brand-black selection:bg-brand-brown selection:text-brand-white overflow-hidden">
+      <Header />
+      <main>
+        <Hero />
+        <Atelier />
+        <Collection />
+        <Services />
+        <Catalog />
+        <Faq />
+        <Contact />
+      </main>
+      <Footer />
+      <WhatsAppButton />
+      <SpeedInsights />
+    </div>
+  );
+}
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -46,6 +79,9 @@ export default function App() {
   const isGraciasPage = currentPath === '/gracias' || searchParams.get('status') === 'approved';
   const isPendingPage = currentPath === '/pendiente' || searchParams.get('status') === 'pending';
   const isErrorPage = currentPath === '/error' || searchParams.get('status') === 'rejected';
+
+  const catalogMatch = currentPath.match(/^\/catalogo\/([a-z0-9-]+)\/?$/);
+  const catalogProduct = catalogMatch ? getCatalogBySlug(catalogMatch[1]) : undefined;
 
   if (isGraciasPage) {
     return (
@@ -79,25 +115,30 @@ export default function App() {
     );
   }
 
-  return (
-    <div className="relative min-h-screen bg-brand-ivory text-brand-black selection:bg-brand-brown selection:text-brand-white overflow-hidden">
-      <Header />
+  if (catalogMatch) {
+    if (!catalogProduct) {
+      return (
+        <div className="min-h-screen bg-brand-ivory flex flex-col items-center justify-center gap-6 px-6">
+          <p className="font-serif text-2xl font-light">Producto no encontrado</p>
+          <button
+            type="button"
+            onClick={handleGoHome}
+            className="px-6 py-3 bg-brand-black text-brand-white font-mono text-xs uppercase tracking-widest"
+          >
+            Volver al inicio
+          </button>
+          <SpeedInsights />
+        </div>
+      );
+    }
 
-      <main>
-        <Hero />
-        <Atelier />
-        <Collection />
-        <Services />
-        <Catalog />
-        <Faq />
-        <Contact />
-      </main>
+    return (
+      <Suspense fallback={<div className="min-h-screen bg-brand-ivory" />}>
+        <ProductPage product={catalogProduct} />
+        <SpeedInsights />
+      </Suspense>
+    );
+  }
 
-      <Footer />
-      <WhatsAppButton />
-
-      {/* Vercel Speed Insights */}
-      <SpeedInsights />
-    </div>
-  );
+  return <HomePage />;
 }
