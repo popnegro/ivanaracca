@@ -26,7 +26,7 @@ export default function EventsPage() {
       description:
         'Diseños de Ivana Racca para Ana Laura Nicoletti, archivo de eventos y notas periodísticas. Atelier en Maipú, Mendoza.',
       canonicalPath: '/eventos',
-      imagePath: EVENT_ITEMS[0]?.images[0] || '/images/og-image.webp',
+      imagePath: '/images/og-image.webp',
       imageAlt: 'Eventos — diseños Ivana Racca',
     });
 
