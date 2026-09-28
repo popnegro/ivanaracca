@@ -4,6 +4,9 @@ import SectionHeader from './SectionHeader';
 import { getWhatsAppUrl } from '../utils/whatsapp';
 import { trackEvent, trackWhatsAppClick, trackInstagramClick } from '../utils/analytics';
 
+const MAPS_URL =
+  'https://maps.google.com/?q=Canal+de+Beagle+2520,+Maip%C3%BA,+Mendoza';
+
 export default function Contact() {
   const shouldReduceMotion = useReducedMotion();
 
@@ -15,6 +18,11 @@ export default function Contact() {
   const handleInstagramClick = () => {
     trackEvent('click_cta', { button_name: 'contact_instagram' });
     trackInstagramClick('contact_section');
+  };
+
+  const handleMapsClick = () => {
+    trackEvent('click_cta', { button_name: 'contact_maps_address' });
+    trackEvent('social_click', { network: 'google_maps', event_label: 'contact_section' });
   };
 
   return (
@@ -84,12 +92,20 @@ export default function Contact() {
                 <span className="font-mono text-xs tracking-widest text-brand-brown uppercase block">
                   Ubicación
                 </span>
-                <p className="font-serif text-xl font-light text-brand-black">
-                  Canal de Beagle 2520
-                </p>
-                <p className="font-serif text-lg font-light text-brand-black/80">
-                  M5514 Maipú, Mendoza
-                </p>
+                <a
+                  href={MAPS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleMapsClick}
+                  className="block font-serif text-xl font-light text-brand-black hover:text-brand-brown underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-colors"
+                  title="Abrir en Google Maps"
+                  aria-label="Abrir ubicación en Google Maps: Canal de Beagle 2520, Maipú, Mendoza"
+                >
+                  <span className="block">Canal de Beagle 2520</span>
+                  <span className="block text-lg text-brand-black/80 group-hover:text-brand-brown">
+                    M5514 Maipú, Mendoza
+                  </span>
+                </a>
               </div>
             </div>
           </motion.div>
