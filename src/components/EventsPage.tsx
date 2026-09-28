@@ -150,7 +150,11 @@ export default function EventsPage() {
                   <div
                     key={src}
                     className={`overflow-hidden border border-brand-brown/10 bg-brand-white ${
-                      i === 0 && item.images.length > 1 ? 'sm:col-span-2 aspect-[16/10]' : 'aspect-square'
+                      item.images.length === 1
+                        ? 'sm:col-span-2 aspect-[4/5]'
+                        : i === 0
+                          ? 'sm:col-span-2 aspect-[16/10]'
+                          : 'aspect-square'
                     }`}
                   >
                     <img

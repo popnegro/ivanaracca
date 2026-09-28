@@ -36,6 +36,32 @@ export const EVENT_TYPE_LABEL: Record<EventType, string> = {
 
 export const EVENT_ITEMS: EventItem[] = [
   {
+    id: 'evt-black-2026',
+    date: '2026-09',
+    dateLabel: '2026',
+    type: 'escena',
+    title: 'Vestido negro de escena',
+    pieceName: 'Vestido Negro',
+    featuredPerson: 'Ana Laura Nicoletti',
+    summary:
+      'Pieza de autor en negro, de presencia escénica y silueta ceñida, realizada por Ivana Racca para una producción nocturna.',
+    images: ['/images/event-ana-laura-negro.webp'],
+    credits: 'Diseño y confección: Ivana Racca · En cuerpo: Ana Laura Nicoletti',
+  },
+  {
+    id: 'evt-turquesa-2026',
+    date: '2026-09',
+    dateLabel: '2026',
+    type: 'escena',
+    title: 'Vestido turquesa de escenario',
+    pieceName: 'Vestido Turquesa',
+    featuredPerson: 'Ana Laura Nicoletti',
+    summary:
+      'Vestido de escena en tono turquesa, con encaje y falda de movimiento, realizado por Ivana Racca para una presentación en vivo.',
+    images: ['/images/event-ana-laura-turquesa.webp'],
+    credits: 'Diseño y confección: Ivana Racca · En cuerpo: Ana Laura Nicoletti',
+  },
+  {
     id: 'evt-plate',
     date: '2024-01',
     dateLabel: '2024',
