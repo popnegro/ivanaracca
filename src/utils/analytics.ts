@@ -1,6 +1,10 @@
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
+ *
+ * Analytics helpers for GA4.
+ * All gtag calls are deferred to the next task so click handlers can paint
+ * first (INP-friendly). Navigation / WhatsApp open must not wait on tracking.
  */
 
 declare global {
@@ -15,16 +19,20 @@ declare global {
 }
 
 /**
- * Utility function to track events in Google Analytics (GA4) via window.gtag.
- * Safely checks if window and window.gtag are defined before dispatching.
- *
- * @param eventName Name of the event (e.g., 'click_cta', 'generate_lead')
- * @param params Optional key-value parameters passed with the event (e.g., { button_name: 'whatsapp_floating' })
+ * Dispatch a GA4 event without blocking the current interaction.
+ * Uses setTimeout(0) so the browser can paint / navigate first (INP).
  */
 export function trackEvent(eventName: string, params?: Record<string, any>): void {
-  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-    window.gtag('event', eventName, params);
-  }
+  if (typeof window === 'undefined') return;
+
+  const send = () => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', eventName, params);
+    }
+  };
+
+  // Defer off the interaction critical path
+  setTimeout(send, 0);
 }
 
 /**
