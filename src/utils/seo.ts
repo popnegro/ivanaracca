@@ -47,6 +47,9 @@ export function applyPageMeta(meta: PageMeta): void {
   setMeta('property', 'og:description', meta.description);
   setMeta('property', 'og:url', url);
   setMeta('property', 'og:image', image);
+  setMeta('property', 'og:image:width', '1200');
+  setMeta('property', 'og:image:height', '630');
+  setMeta('property', 'og:image:type', 'image/webp');
   if (meta.imageAlt) setMeta('property', 'og:image:alt', meta.imageAlt);
 
   setMeta('name', 'twitter:title', meta.title);

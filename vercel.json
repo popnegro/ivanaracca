@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/((?!api/|images/|favicon|robots\\.txt|sitemap\\.xml|llms\\.txt|apple-touch-icon|.*\\.(?:js|css|png|jpg|jpeg|webp|ico|svg|woff2?)).*)",
+      "source": "/((?!api/|eventos(?:/.*)?|catalogo/(?:trucadoras|suspensores|ropa-interior)(?:/.*)?|images/|favicon|robots\\.txt|sitemap\\.xml|llms\\.txt|apple-touch-icon|.*\\.(?:js|css|png|jpg|jpeg|webp|ico|svg|woff2?)).*)",
       "destination": "/index.html"
     }
   ],
