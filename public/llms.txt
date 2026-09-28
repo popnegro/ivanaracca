@@ -9,6 +9,7 @@ Sitio oficial del atelier de [Ivana Racca](https://ivanaracca.vercel.app/): dise
 - Ajustes y transformaciones de prendas
 - Vestuario escénico
 - Catálogo: trucadoras, suspensores y ropa interior en talles exclusivos o especiales
+- Diseños para escena (Ana Laura Nicoletti) y archivo de eventos
 
 ## Ubicación
 
@@ -31,6 +32,7 @@ Lunes a viernes, 9 a 17 hs (cita previa por WhatsApp).
 - [Inicio](https://ivanaracca.vercel.app/)
 - [Atelier](https://ivanaracca.vercel.app/#atelier)
 - [Colección](https://ivanaracca.vercel.app/#coleccion)
+- [Eventos y prensa](https://ivanaracca.vercel.app/eventos)
 - [Oficio](https://ivanaracca.vercel.app/#oficio)
 - [Catálogo](https://ivanaracca.vercel.app/#catalogo)
 - [Trucadoras](https://ivanaracca.vercel.app/catalogo/trucadoras)
