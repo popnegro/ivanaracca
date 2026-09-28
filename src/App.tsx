@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import Atelier from './components/Atelier';
 import Collection from './components/Collection';
+import Events from './components/Events';
 import Services from './components/Services';
 import Catalog from './components/Catalog';
 import Faq from './components/Faq';
@@ -23,6 +24,7 @@ const ErrorView = lazy(() =>
   import('./components/OrderReceipts').then((module) => ({ default: module.ErrorView }))
 );
 const ProductPage = lazy(() => import('./components/ProductPage'));
+const EventsPage = lazy(() => import('./components/EventsPage'));
 
 function HomePage() {
   useEffect(() => {
@@ -43,6 +45,7 @@ function HomePage() {
         <Hero />
         <Atelier />
         <Collection />
+        <Events />
         <Services />
         <Catalog />
         <Faq />
@@ -64,7 +67,6 @@ export default function App() {
       setCurrentPath(window.location.pathname);
       setSearchParams(new URLSearchParams(window.location.search));
     };
-
     window.addEventListener('popstate', handleLocationChange);
     return () => window.removeEventListener('popstate', handleLocationChange);
   }, []);
@@ -79,6 +81,7 @@ export default function App() {
   const isGraciasPage = currentPath === '/gracias' || searchParams.get('status') === 'approved';
   const isPendingPage = currentPath === '/pendiente' || searchParams.get('status') === 'pending';
   const isErrorPage = currentPath === '/error' || searchParams.get('status') === 'rejected';
+  const isEventsPage = currentPath === '/eventos' || currentPath === '/eventos/';
 
   const catalogMatch = currentPath.match(/^\/catalogo\/([a-z0-9-]+)\/?$/);
   const catalogProduct = catalogMatch ? getCatalogBySlug(catalogMatch[1]) : undefined;
@@ -115,6 +118,15 @@ export default function App() {
     );
   }
 
+  if (isEventsPage) {
+    return (
+      <Suspense fallback={<div className="min-h-screen bg-brand-ivory" />}>
+        <EventsPage />
+        <SpeedInsights />
+      </Suspense>
+    );
+  }
+
   if (catalogMatch) {
     if (!catalogProduct) {
       return (
@@ -131,7 +143,6 @@ export default function App() {
         </div>
       );
     }
-
     return (
       <Suspense fallback={<div className="min-h-screen bg-brand-ivory" />}>
         <ProductPage product={catalogProduct} />
