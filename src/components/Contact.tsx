@@ -12,7 +12,10 @@ export default function Contact() {
 
   const handleWhatsAppClick = () => {
     trackEvent('click_cta', { button_name: 'contact_hablar_con_ivana' });
-    trackWhatsAppClick('contact_section', 'Hola Ivana, tengo una idea para una prenda y me gustaría que hablemos.');
+    trackWhatsAppClick(
+      'contact_section',
+      'Hola Ivana, tengo una idea para una prenda y me gustaría que hablemos.'
+    );
   };
 
   const handleInstagramClick = () => {
@@ -29,8 +32,6 @@ export default function Contact() {
     <section id="contacto" className="py-20 md:py-32 bg-brand-white border-b border-brand-brown/10">
       <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-          
-          {/* Left Column: Heading and CTAs */}
           <div className="space-y-8 flex flex-col justify-center">
             <SectionHeader
               label="CONTACTO"
@@ -38,15 +39,21 @@ export default function Contact() {
               intro="Hablemos de cómo hacerla realidad."
             />
 
-            <motion.div 
+            <motion.div
               initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: shouldReduceMotion ? 0 : 0.2, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{
+                duration: 0.6,
+                delay: shouldReduceMotion ? 0 : 0.2,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               className="flex flex-col sm:flex-row gap-4 pt-4"
             >
               <a
-                href={getWhatsAppUrl("Hola Ivana, tengo una idea para una prenda y me gustaría que hablemos.")}
+                href={getWhatsAppUrl(
+                  'Hola Ivana, tengo una idea para una prenda y me gustaría que hablemos.'
+                )}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleWhatsAppClick}
@@ -54,7 +61,7 @@ export default function Contact() {
               >
                 HABLAR CON IVANA
               </a>
-              
+
               <a
                 href="https://www.instagram.com/ivanaracca/"
                 target="_blank"
@@ -67,12 +74,15 @@ export default function Contact() {
             </motion.div>
           </div>
 
-          {/* Right Column: Studio Credentials and Info */}
-          <motion.div 
+          <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: shouldReduceMotion ? 0 : 0.25, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{
+              duration: 0.6,
+              delay: shouldReduceMotion ? 0 : 0.25,
+              ease: [0.16, 1, 0.3, 1],
+            }}
             className="flex items-center md:justify-end"
           >
             <div className="border-l-2 border-brand-brown/20 pl-8 py-6 space-y-6">
@@ -102,14 +112,26 @@ export default function Contact() {
                   aria-label="Abrir ubicación en Google Maps: Canal de Beagle 2520, Maipú, Mendoza"
                 >
                   <span className="block">Canal de Beagle 2520</span>
-                  <span className="block text-lg text-brand-black/80 group-hover:text-brand-brown">
+                  <span className="block text-lg text-brand-black/80">
                     M5514 Maipú, Mendoza
                   </span>
                 </a>
               </div>
+
+              <div className="space-y-2">
+                <span className="font-mono text-xs tracking-widest text-brand-brown uppercase block">
+                  Horarios
+                </span>
+                <p className="font-serif text-xl font-light text-brand-black">
+                  Lunes a viernes
+                  <span className="block text-lg text-brand-black/80">9 a 17 hs</span>
+                </p>
+                <p className="font-serif text-sm font-light text-brand-black/70">
+                  Atención con cita previa por WhatsApp.
+                </p>
+              </div>
             </div>
           </motion.div>
-
         </div>
       </div>
     </section>
