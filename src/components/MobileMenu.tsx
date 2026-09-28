@@ -10,20 +10,19 @@ interface MobileMenuProps {
   navLinks: Array<{ label: string; href: string }>;
 }
 
+const HEADER_OFFSET = 80;
+
 export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const previousActiveElementRef = useRef<HTMLElement | null>(null);
   const shouldReduceMotion = useReducedMotion();
 
-  // Focus trap and accessibility
   useEffect(() => {
     if (isOpen) {
-      // Remember previously focused element to return focus when menu closes
       previousActiveElementRef.current = document.activeElement as HTMLElement | null;
       document.body.style.overflow = 'hidden';
 
-      // Initial focus placed inside the drawer
       setTimeout(() => {
         closeButtonRef.current?.focus();
       }, 50);
@@ -39,7 +38,6 @@ export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProp
     };
   }, [isOpen]);
 
-  // Focus trap (Tab / Shift+Tab) & Escape key handling
   useEffect(() => {
     if (!isOpen) return;
 
@@ -64,11 +62,9 @@ export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProp
             e.preventDefault();
             lastElement.focus();
           }
-        } else {
-          if (document.activeElement === lastElement) {
-            e.preventDefault();
-            firstElement.focus();
-          }
+        } else if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
         }
       }
     };
@@ -79,10 +75,17 @@ export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProp
 
   const handleLinkClick = (href: string) => {
     onClose();
-    // Smooth scroll to the target
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - HEADER_OFFSET;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
     }
   };
 
@@ -90,7 +93,6 @@ export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProp
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.5 }}
@@ -98,9 +100,9 @@ export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProp
             transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
             className="fixed inset-0 bg-brand-black z-40"
             onClick={onClose}
+            aria-hidden="true"
           />
 
-          {/* Drawer Menu */}
           <motion.div
             ref={drawerRef}
             id="mobile-menu"
@@ -131,18 +133,19 @@ export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProp
               </button>
             </div>
 
-            <nav className="flex flex-col flex-1 divide-y divide-brand-brown/10 py-2">
+            <nav className="flex flex-col flex-1 divide-y divide-brand-brown/10 py-2" aria-label="Mobile">
               {navLinks.map((link, idx) => (
                 <button
                   key={link.label}
+                  type="button"
                   onClick={() => handleLinkClick(link.href)}
                   className="group flex items-baseline justify-between text-left py-4 text-brand-black hover:text-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-all duration-200"
                 >
                   <span className="font-serif text-2xl font-normal tracking-wide group-hover:translate-x-1.5 transition-transform duration-200">
                     {link.label.charAt(0) + link.label.slice(1).toLowerCase()}
                   </span>
-                  <span 
-                    aria-hidden="true" 
+                  <span
+                    aria-hidden="true"
                     className="font-mono text-xs text-brand-brown/60 group-hover:text-brand-brown font-light tracking-widest"
                   >
                     0{idx + 1}
@@ -153,11 +156,16 @@ export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProp
 
             <div className="pt-6 border-t border-brand-brown/20 mt-auto">
               <a
-                href={getWhatsAppUrl("Hola Ivana, me gustaría hablar con vos sobre tu taller y diseños.")}
+                href={getWhatsAppUrl(
+                  'Hola Ivana, me gustaría hablar con vos sobre tu taller y diseños.'
+                )}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => {
-                  trackWhatsAppClick('mobile_menu', 'Hola Ivana, me gustaría hablar con vos sobre tu taller y diseños.');
+                  trackWhatsAppClick(
+                    'mobile_menu',
+                    'Hola Ivana, me gustaría hablar con vos sobre tu taller y diseños.'
+                  );
                   onClose();
                 }}
                 className="block w-full text-center px-4 py-3 bg-brand-black text-brand-white hover:bg-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-colors font-mono text-xs uppercase tracking-widest"
