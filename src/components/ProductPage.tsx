@@ -25,7 +25,7 @@ export default function ProductPage({ product }: Props) {
       title: product.seoTitle,
       description: product.seoDescription,
       canonicalPath: `/catalogo/${product.slug}`,
-      imagePath: product.imageUrl,
+      imagePath: '/images/og-image.webp',
       imageAlt: `${product.name} — Ivana Racca, Maipú Mendoza`,
     });
 
