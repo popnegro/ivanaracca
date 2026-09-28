@@ -7,6 +7,7 @@ import { FAQ_ITEMS } from '../data';
 /**
  * FAQ section aligned with FAQPage JSON-LD in index.html.
  * Answers stay in the DOM when collapsed so crawlers/a11y see full text.
+ * No role="listitem" on <article> — invalid ARIA (fails agent a11y tree).
  */
 export default function Faq() {
   const [openId, setOpenId] = useState<string | null>(FAQ_ITEMS[0]?.id ?? null);
@@ -31,25 +32,20 @@ export default function Faq() {
             title="Antes de escribir"
             intro="Respuestas claras sobre el atelier, plazos y cómo empezar."
           />
-          {/* Visible title is the SectionHeader h2; id for aria-labelledby */}
           <span id="faq-heading" className="sr-only">
             Preguntas frecuentes — Ivana Racca
           </span>
         </div>
 
-        <div
-          className="max-w-3xl space-y-0 divide-y divide-brand-brown/15 border-y border-brand-brown/15"
-          role="list"
-        >
+        <div className="max-w-3xl space-y-0 divide-y divide-brand-brown/15 border-y border-brand-brown/15">
           {FAQ_ITEMS.map((item, index) => {
             const isOpen = openId === item.id;
             const panelId = `faq-panel-${item.id}`;
             const buttonId = `faq-button-${item.id}`;
 
             return (
-              <motion.article
+              <motion.div
                 key={item.id}
-                role="listitem"
                 itemScope
                 itemProp="mainEntity"
                 itemType="https://schema.org/Question"
@@ -83,7 +79,6 @@ export default function Faq() {
                   </button>
                 </h3>
 
-                {/* Answer always mounted — collapse with hidden + CSS for crawlers & a11y */}
                 <div
                   id={panelId}
                   role="region"
@@ -101,7 +96,7 @@ export default function Faq() {
                     {item.answer}
                   </p>
                 </div>
-              </motion.article>
+              </motion.div>
             );
           })}
         </div>
