@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Atelier from './components/Atelier';
@@ -54,6 +55,7 @@ export default function App() {
           externalReference={searchParams.get('external_reference')}
           onGoHome={handleGoHome}
         />
+        <SpeedInsights />
       </Suspense>
     );
   }
@@ -62,6 +64,7 @@ export default function App() {
     return (
       <Suspense fallback={<div className="min-h-screen bg-brand-ivory" />}>
         <PendienteView onGoHome={handleGoHome} />
+        <SpeedInsights />
       </Suspense>
     );
   }
@@ -70,6 +73,7 @@ export default function App() {
     return (
       <Suspense fallback={<div className="min-h-screen bg-brand-ivory" />}>
         <ErrorView onGoHome={handleGoHome} />
+        <SpeedInsights />
       </Suspense>
     );
   }
@@ -105,6 +109,9 @@ export default function App() {
 
       {/* Elegant Mobile Floating WhatsApp Button */}
       <WhatsAppButton />
+
+      {/* Vercel Speed Insights */}
+      <SpeedInsights />
     </div>
   );
 }
