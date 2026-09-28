@@ -1,6 +1,6 @@
 # Ivana Racca — Alta costura y modistería en Maipú, Mendoza
 
-Sitio oficial del atelier de Ivana Racca: diseñadora y modista en Maipú, Mendoza, Argentina.
+Sitio oficial del atelier de [Ivana Racca](https://ivanaracca.vercel.app/): diseñadora y modista en Maipú, Mendoza, Argentina.
 
 ## Qué ofrece
 
@@ -14,7 +14,7 @@ Sitio oficial del atelier de Ivana Racca: diseñadora y modista en Maipú, Mendo
 
 Canal de Beagle 2520, M5514 Maipú, Mendoza, Argentina
 
-Mapa: https://maps.google.com/?q=Canal+de+Beagle+2520,+Maip%C3%BA,+Mendoza
+[Ver en Google Maps](https://maps.google.com/?q=Canal+de+Beagle+2520,+Maip%C3%BA,+Mendoza)
 
 ## Horarios
 
@@ -23,15 +23,15 @@ Lunes a viernes, 9 a 17 hs (cita previa por WhatsApp).
 ## Contacto
 
 - WhatsApp: +54 9 261 753-0617
-- Instagram: https://www.instagram.com/ivanaracca/
-- Web: https://ivanaracca.vercel.app/
+- [Instagram](https://www.instagram.com/ivanaracca/)
+- [Sitio web](https://ivanaracca.vercel.app/)
 
-## Enlaces
+## Enlaces del sitio
 
-- Inicio: https://ivanaracca.vercel.app/
-- Atelier: https://ivanaracca.vercel.app/#atelier
-- Colección: https://ivanaracca.vercel.app/#coleccion
-- Oficio: https://ivanaracca.vercel.app/#oficio
-- Catálogo: https://ivanaracca.vercel.app/#catalogo
-- Preguntas frecuentes: https://ivanaracca.vercel.app/#faq
-- Contacto: https://ivanaracca.vercel.app/#contacto
+- [Inicio](https://ivanaracca.vercel.app/)
+- [Atelier](https://ivanaracca.vercel.app/#atelier)
+- [Colección](https://ivanaracca.vercel.app/#coleccion)
+- [Oficio](https://ivanaracca.vercel.app/#oficio)
+- [Catálogo](https://ivanaracca.vercel.app/#catalogo)
+- [Preguntas frecuentes](https://ivanaracca.vercel.app/#faq)
+- [Contacto](https://ivanaracca.vercel.app/#contacto)
