@@ -33,5 +33,8 @@ Lunes a viernes, 9 a 17 hs (cita previa por WhatsApp).
 - [Colección](https://ivanaracca.vercel.app/#coleccion)
 - [Oficio](https://ivanaracca.vercel.app/#oficio)
 - [Catálogo](https://ivanaracca.vercel.app/#catalogo)
+- [Trucadoras](https://ivanaracca.vercel.app/catalogo/trucadoras)
+- [Suspensores](https://ivanaracca.vercel.app/catalogo/suspensores)
+- [Ropa interior talles especiales](https://ivanaracca.vercel.app/catalogo/ropa-interior)
 - [Preguntas frecuentes](https://ivanaracca.vercel.app/#faq)
 - [Contacto](https://ivanaracca.vercel.app/#contacto)
