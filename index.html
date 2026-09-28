@@ -60,11 +60,11 @@
   <meta name="twitter:image" content="https://ivanaracca.vercel.app/images/og-image.webp" />
   <meta name="twitter:image:alt" content="Ivana Racca — Alta Costura y Diseño de Autor" />
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts (pesos reducidos: menos cadena crítica / LCP) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" />
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" />
 
   <!-- LCP image preload -->
   <link rel="preload" as="image" href="/images/ana-laura-turca-nicoletti-plate-dress-up.webp" fetchpriority="high" />
@@ -326,7 +326,7 @@
         "@type": "Product",
         "@id": "https://ivanaracca.vercel.app/#product-ropa-interior",
         "name": "Ropa interior — talles exclusivos o especiales",
-        "description": "Talles exclusivos o especiales, confeccionados para necesidades que no siempre encuentran respuesta en las medidas convencionales.",
+        "description": "Talles exclusivos o especiales, confeccionados para necesidades que no siempre encuentran respuesta en medidas convencionales.",
         "image": "https://ivanaracca.vercel.app/images/ropa-interior-inclusiva.webp",
         "category": "Apparel & Accessories > Clothing > Underwear & Socks",
         "brand": {
@@ -345,13 +345,39 @@
     ]
   }
   </script>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-48NQ6Q1TT0"></script>
+
+  <!-- GA4: carga diferida tras load + idle (INP / main thread) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-48NQ6Q1TT0');
+    window.gtag = gtag;
+
+    function loadGtag() {
+      if (document.getElementById('ga4-gtag')) return;
+      var s = document.createElement('script');
+      s.id = 'ga4-gtag';
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-48NQ6Q1TT0';
+      s.onload = function () {
+        gtag('js', new Date());
+        gtag('config', 'G-48NQ6Q1TT0', { send_page_view: true });
+      };
+      document.head.appendChild(s);
+    }
+
+    function scheduleGtag() {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGtag, { timeout: 4000 });
+      } else {
+        setTimeout(loadGtag, 2000);
+      }
+    }
+
+    if (document.readyState === 'complete') {
+      scheduleGtag();
+    } else {
+      window.addEventListener('load', scheduleGtag, { once: true });
+    }
   </script>
 </head>
 
