@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/((?!api/|images/|favicon|robots\\.txt|sitemap\\.xml|apple-touch-icon|.*\\.(?:js|css|png|jpg|jpeg|webp|ico|svg|woff2?)).*)",
+      "source": "/((?!api/|images/|favicon|robots\\.txt|sitemap\\.xml|llms\\.txt|apple-touch-icon|.*\\.(?:js|css|png|jpg|jpeg|webp|ico|svg|woff2?)).*)",
       "destination": "/index.html"
     }
   ],
@@ -46,7 +46,7 @@
       ]
     },
     {
-      "source": "/(robots\\.txt|sitemap\\.xml)",
+      "source": "/(robots\\.txt|sitemap\\.xml|llms\\.txt)",
       "headers": [
         {
           "key": "Cache-Control",
