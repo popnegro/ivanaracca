@@ -1,15 +1,30 @@
 # Ivana Racca — Alta costura y modistería en Maipú, Mendoza
 
-Sitio oficial del atelier de [Ivana Racca](https://ivanaracca.vercel.app/): diseñadora y modista en Maipú, Mendoza, Argentina.
+Sitio oficial del atelier de [Ivana Racca](https://ivanaracca.vercel.app/): diseñadora de indumentaria y modista en Maipú, Mendoza, Argentina.
+
+## Identidad de la entidad
+
+- Nombre: Ivana Racca
+- Profesión: diseñadora de indumentaria y modista
+- Actividad: alta costura, confección a medida, modistería artesanal y vestuario escénico
+- Ubicación: Maipú, Mendoza, Argentina
+- Atelier: Canal de Beagle 2520, M5514 Maipú, Mendoza
+- Instagram: https://www.instagram.com/ivanaracca/
 
 ## Qué ofrece
 
 - Alta costura
 - Confección a medida
 - Ajustes y transformaciones de prendas
-- Vestuario escénico
+- Vestuario escénico para espectáculos, teatro, danza y producciones
 - Catálogo: trucadoras, suspensores y ropa interior en talles exclusivos o especiales
-- Diseños para escena (Ana Laura Nicoletti) y archivo de eventos
+- Diseños para escena y eventos
+
+## Evidencia y archivo
+
+La sección [Eventos y prensa](https://ivanaracca.vercel.app/eventos) documenta piezas creadas por Ivana Racca para Ana Laura Nicoletti y enlaza notas periodísticas externas sobre su oficio.
+
+Las piezas del archivo se describen con nombre, tipo, persona vinculada, resumen, créditos e imagen. Las publicaciones nuevas utilizan una imagen WebP por pieza.
 
 ## Ubicación
 
@@ -24,19 +39,22 @@ Lunes a viernes, 9 a 17 hs (cita previa por WhatsApp).
 ## Contacto
 
 - WhatsApp: +54 9 261 753-0617
-- [Instagram](https://www.instagram.com/ivanaracca/)
-- [Sitio web](https://ivanaracca.vercel.app/)
+- Instagram: https://www.instagram.com/ivanaracca/
+- Sitio web: https://ivanaracca.vercel.app/
 
-## Enlaces del sitio
+## Enlaces canónicos del sitio
 
 - [Inicio](https://ivanaracca.vercel.app/)
-- [Atelier](https://ivanaracca.vercel.app/#atelier)
-- [Colección](https://ivanaracca.vercel.app/#coleccion)
 - [Eventos y prensa](https://ivanaracca.vercel.app/eventos)
-- [Oficio](https://ivanaracca.vercel.app/#oficio)
-- [Catálogo](https://ivanaracca.vercel.app/#catalogo)
 - [Trucadoras](https://ivanaracca.vercel.app/catalogo/trucadoras)
 - [Suspensores](https://ivanaracca.vercel.app/catalogo/suspensores)
 - [Ropa interior talles especiales](https://ivanaracca.vercel.app/catalogo/ropa-interior)
+
+## Secciones de Inicio
+
+- [Atelier](https://ivanaracca.vercel.app/#atelier)
+- [Colección](https://ivanaracca.vercel.app/#coleccion)
+- [Oficio](https://ivanaracca.vercel.app/#oficio)
+- [Catálogo](https://ivanaracca.vercel.app/#catalogo)
 - [Preguntas frecuentes](https://ivanaracca.vercel.app/#faq)
 - [Contacto](https://ivanaracca.vercel.app/#contacto)
