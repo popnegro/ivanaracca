@@ -3,16 +3,15 @@ import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { X } from 'lucide-react';
 import { getWhatsAppUrl } from '../utils/whatsapp';
 import { trackWhatsAppClick } from '../utils/analytics';
+import { PRIMARY_NAV, SECONDARY_NAV } from '../nav';
+import { goNav } from '../utils/navigation';
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
-  navLinks: Array<{ label: string; href: string }>;
 }
 
-const HEADER_OFFSET = 80;
-
-export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
+export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const previousActiveElementRef = useRef<HTMLElement | null>(null);
@@ -22,17 +21,11 @@ export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProp
     if (isOpen) {
       previousActiveElementRef.current = document.activeElement as HTMLElement | null;
       document.body.style.overflow = 'hidden';
-
-      setTimeout(() => {
-        closeButtonRef.current?.focus();
-      }, 50);
+      setTimeout(() => closeButtonRef.current?.focus(), 50);
     } else {
       document.body.style.overflow = '';
-      if (previousActiveElementRef.current) {
-        previousActiveElementRef.current.focus();
-      }
+      previousActiveElementRef.current?.focus();
     }
-
     return () => {
       document.body.style.overflow = '';
     };
@@ -40,53 +33,34 @@ export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProp
 
   useEffect(() => {
     if (!isOpen) return;
-
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
         return;
       }
-
       if (e.key === 'Tab' && drawerRef.current) {
-        const focusableElements = drawerRef.current.querySelectorAll<HTMLElement>(
+        const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
         );
-
-        if (focusableElements.length === 0) return;
-
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
-
-        if (e.shiftKey) {
-          if (document.activeElement === firstElement) {
-            e.preventDefault();
-            lastElement.focus();
-          }
-        } else if (document.activeElement === lastElement) {
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
           e.preventDefault();
-          firstElement.focus();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
         }
       }
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  const handleLinkClick = (href: string) => {
+  const handleNav = (href: string, kind: 'hash' | 'route') => {
     onClose();
-    const element = document.querySelector(href);
-    if (element) {
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - HEADER_OFFSET;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-    }
+    setTimeout(() => goNav(href, kind), 50);
   };
 
   return (
@@ -108,7 +82,7 @@ export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProp
             id="mobile-menu"
             role="dialog"
             aria-modal="true"
-            aria-label="Menú de Navegación"
+            aria-label="Menú de navegación"
             initial={{ x: shouldReduceMotion ? 0 : '100%' }}
             animate={{ x: 0 }}
             exit={{ x: shouldReduceMotion ? 0 : '100%' }}
@@ -125,6 +99,7 @@ export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProp
               </span>
               <button
                 ref={closeButtonRef}
+                type="button"
                 onClick={onClose}
                 aria-label="Cerrar menú"
                 className="p-2 text-brand-black hover:text-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 rounded-xs transition-colors"
@@ -133,12 +108,12 @@ export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProp
               </button>
             </div>
 
-            <nav className="flex flex-col flex-1 divide-y divide-brand-brown/10 py-2" aria-label="Mobile">
-              {navLinks.map((link, idx) => (
+            <nav className="flex flex-col flex-1 divide-y divide-brand-brown/10 py-2" aria-label="Principal">
+              {PRIMARY_NAV.map((link, idx) => (
                 <button
                   key={link.label}
                   type="button"
-                  onClick={() => handleLinkClick(link.href)}
+                  onClick={() => handleNav(link.href, link.kind)}
                   className="group flex items-baseline justify-between text-left py-4 text-brand-black hover:text-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-all duration-200"
                 >
                   <span className="font-serif text-2xl font-normal tracking-wide group-hover:translate-x-1.5 transition-transform duration-200">
@@ -154,7 +129,23 @@ export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProp
               ))}
             </nav>
 
-            <div className="pt-6 border-t border-brand-brown/20 mt-auto">
+            <div className="pt-4 border-t border-brand-brown/15 space-y-1">
+              <p className="font-mono text-[10px] tracking-widest text-brand-black/40 uppercase mb-2">
+                Más
+              </p>
+              {SECONDARY_NAV.map((link) => (
+                <button
+                  key={link.label}
+                  type="button"
+                  onClick={() => handleNav(link.href, link.kind)}
+                  className="block w-full text-left py-2 font-serif text-base text-brand-black/70 hover:text-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown"
+                >
+                  {link.label}
+                </button>
+              ))}
+            </div>
+
+            <div className="pt-6 border-t border-brand-brown/20 mt-4">
               <a
                 href={getWhatsAppUrl(
                   'Hola Ivana, me gustaría hablar con vos sobre tu taller y diseños.'
@@ -170,7 +161,7 @@ export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProp
                 }}
                 className="block w-full text-center px-4 py-3 bg-brand-black text-brand-white hover:bg-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-colors font-mono text-xs uppercase tracking-widest"
               >
-                HABLAR CON IVANA
+                Hablar con Ivana
               </a>
             </div>
           </motion.div>

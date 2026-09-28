@@ -2,7 +2,7 @@
 
 export function navigate(path: string): void {
   if (typeof window === 'undefined') return;
-  if (window.location.pathname === path && !window.location.hash) {
+  if (window.location.pathname === path && !path.includes('#')) {
     window.scrollTo(0, 0);
     return;
   }
@@ -13,7 +13,6 @@ export function navigate(path: string): void {
 
 const HEADER_OFFSET = 80;
 
-/** Smooth-scroll to a hash target on the current document (home sections). */
 export function scrollToHash(hash: string): void {
   if (typeof window === 'undefined') return;
   const id = hash.startsWith('#') ? hash.slice(1) : hash;
@@ -23,19 +22,16 @@ export function scrollToHash(hash: string): void {
   window.scrollTo({ top, behavior: 'smooth' });
 }
 
-/**
- * From any route: go home then scroll to section, or navigate to a path.
- */
+/** Hash section or route from any page */
 export function goNav(href: string, kind: 'hash' | 'route'): void {
   if (kind === 'route') {
     navigate(href);
     return;
   }
   if (window.location.pathname !== '/') {
-    window.history.pushState({}, '', `/${href}`);
+    window.history.pushState({}, '', '/');
     window.dispatchEvent(new PopStateEvent('popstate'));
-    // After home mounts, scroll
-    setTimeout(() => scrollToHash(href), 80);
+    setTimeout(() => scrollToHash(href), 100);
     return;
   }
   scrollToHash(href);
