@@ -5,9 +5,7 @@
 
 import express, { Request, Response } from 'express';
 import path from 'path';
-import { readFile } from 'fs/promises';
 import { createServer as createViteServer } from 'vite';
-import { buildHeadHtml, getServerPageSeo } from './src/utils/serverSeo';
 import dotenv from 'dotenv';
 
 // Load environment variables
@@ -353,40 +351,9 @@ async function startServer() {
     console.log(`Serving compiled static build files from: ${distPath}`);
     app.use(express.static(distPath));
     
-    // Route-aware HTML shell: indexable routes receive metadata/JSON-LD in the
-    // initial response instead of waiting for client-side React effects.
-    app.get('*', async (req: Request, res: Response) => {
-      try {
-        const indexHtml = await readFile(path.join(distPath, 'index.html'), 'utf8');
-        const seo = getServerPageSeo(req.path);
-        const dynamicHead = buildHeadHtml(seo).replace(
-          /\\n?  <script type="application\\/ld\\+json" id="server-seo-jsonld">[\\s\\S]*?<\\/script>/,
-          '',
-        );
-        const schema = `  <script type="application/ld+json">\\n  ${JSON.stringify(seo.jsonLd, null, 2).replace(/</g, '\\u003c')}\\n  </script>`;
-        const html = indexHtml
-          .replace(
-            /<!-- SEO_DYNAMIC_HEAD_START -->[\\s\\S]*?<!-- SEO_DYNAMIC_HEAD_END -->/,
-            `<!-- SEO_DYNAMIC_HEAD_START -->\\n  ${dynamicHead}\\n  <!-- SEO_DYNAMIC_HEAD_END -->`,
-          )
-          .replace(
-            /<!-- SEO_SCHEMA_START -->[\\s\\S]*?<!-- SEO_SCHEMA_END -->/,
-            `<!-- SEO_SCHEMA_START -->\\n  ${schema}\\n  <!-- SEO_SCHEMA_END -->`,
-          );
-
-        const knownRoute =
-          req.path === '/' ||
-          req.path === '/eventos' ||
-          req.path === '/gracias' ||
-          req.path === '/pendiente' ||
-          req.path === '/error' ||
-          /^\\/catalogo\\/(trucadoras|suspensores|ropa-interior)\\/?$/.test(req.path);
-
-        res.status(knownRoute ? 200 : 404).type('html').send(html);
-      } catch (error) {
-        console.error('Error rendering SEO HTML shell:', error);
-        res.status(500).send('Error interno del servidor.');
-      }
+    // Fallback for SPA Routing - serve index.html for all sub-routes (e.g. /gracias, /pendiente)
+    app.get('*', (req: Request, res: Response) => {
+      res.sendFile(path.join(distPath, 'index.html'));
     });
   }
 
