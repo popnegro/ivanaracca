@@ -85,7 +85,10 @@ export default function Contact() {
                   Ubicación
                 </span>
                 <p className="font-serif text-xl font-light text-brand-black">
-                  Maipú, Mendoza, Argentina
+                  Canal de Beagle 2520
+                </p>
+                <p className="font-serif text-lg font-light text-brand-black/80">
+                  M5514 Maipú, Mendoza
                 </p>
               </div>
             </div>
