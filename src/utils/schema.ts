@@ -115,32 +115,6 @@ export function buildProductPageGraph(product: CatalogItem): Record<string, unkn
         ],
       },
       productNode,
-      {
-        '@type': 'FAQPage',
-        '@id': `${pageUrl}#faq`,
-        mainEntity: product.faqs.map((f, i) => ({
-          '@type': 'Question',
-          '@id': `${pageUrl}#faq-${i + 1}`,
-          name: f.question,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            '@id': `${pageUrl}#faq-${i + 1}-answer`,
-            text: f.answer,
-          },
-        })),
-      },
     ],
   };
-}
-
-/** Product nodes for home page @graph (static index.html parity) */
-export function buildHomeCatalogProductNodes(
-  products: CatalogItem[]
-): Record<string, unknown>[] {
-  return products.map((p) => {
-    const node = buildProductSchema(p, { pagePath: `/catalogo/${p.slug}` });
-    const offers = node.offers as Record<string, unknown>;
-    delete offers.hasMerchantReturnPolicy;
-    return node;
-  });
 }
