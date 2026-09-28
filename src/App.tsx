@@ -4,7 +4,6 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import Atelier from './components/Atelier';
 import Collection from './components/Collection';
-import Events from './components/Events';
 import Services from './components/Services';
 import Catalog from './components/Catalog';
 import Faq from './components/Faq';
@@ -45,7 +44,6 @@ function HomePage() {
         <Hero />
         <Atelier />
         <Collection />
-        <Events />
         <Services />
         <Catalog />
         <Faq />
