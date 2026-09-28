@@ -5,6 +5,7 @@ import Atelier from './components/Atelier';
 import Collection from './components/Collection';
 import Services from './components/Services';
 import Catalog from './components/Catalog';
+import Faq from './components/Faq';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
@@ -76,34 +77,19 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-brand-ivory text-brand-black selection:bg-brand-brown selection:text-brand-white overflow-hidden">
-      {/* Sticky Header Navigation */}
       <Header />
 
-      {/* Main Content Layout */}
       <main>
-        {/* HERO Section */}
         <Hero />
-
-        {/* ATELIER Section */}
         <Atelier />
-
-        {/* COLECCIÓN Section */}
         <Collection />
-
-        {/* OFICIO Section */}
         <Services />
-
-        {/* CATÁLOGO Section */}
         <Catalog />
-
-        {/* CONTACTO Section */}
+        <Faq />
         <Contact />
       </main>
 
-      {/* Footer Section */}
       <Footer />
-
-      {/* Elegant Mobile Floating WhatsApp Button */}
       <WhatsAppButton />
     </div>
   );

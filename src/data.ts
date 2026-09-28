@@ -1,6 +1,6 @@
 /**
  * Official Data for Ivana Racca website.
- * Contains Collection, Services (Oficio), and Catalog (Products).
+ * Contains Collection, Services (Oficio), Catalog (Products), and FAQ.
  */
 
 export interface CollectionItem {
@@ -26,6 +26,12 @@ export interface CatalogItem {
   description: string;
   imageUrl: string;
   whatsappMessage: string;
+}
+
+export interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
 }
 
 export const COLLECTION_ITEMS: CollectionItem[] = [
@@ -131,5 +137,44 @@ export const CATALOG_ITEMS: CatalogItem[] = [
     description: "Talles exclusivos o especiales, confeccionados para necesidades que no siempre encuentran respuesta en las medidas convencionales.",
     imageUrl: "/images/ropa-interior-inclusiva.webp",
     whatsappMessage: "Hola Ivana, quiero consultar por ropa interior en talles exclusivos o especiales."
+  }
+];
+
+export const FAQ_ITEMS: FaqItem[] = [
+  {
+    id: "faq-1",
+    question: "¿Dónde está el atelier de Ivana Racca?",
+    answer:
+      "El atelier está en Canal de Beagle 2520, M5514 Maipú, Mendoza, Argentina. Las consultas y turnos se coordinan por WhatsApp."
+  },
+  {
+    id: "faq-2",
+    question: "¿Qué servicios ofrece?",
+    answer:
+      "Alta costura, confección a medida, ajustes y transformaciones de prendas, vestuario escénico, y catálogo de prendas interiores (trucadoras, suspensores y talles especiales)."
+  },
+  {
+    id: "faq-3",
+    question: "¿Cómo pido un presupuesto o turno?",
+    answer:
+      "Por WhatsApp al +54 9 261 753-0617. Contá tu idea, el tipo de prenda o servicio que necesitás y te responde Ivana para coordinar."
+  },
+  {
+    id: "faq-4",
+    question: "¿Trabaja con talles especiales o exclusivos?",
+    answer:
+      "Sí. Parte del oficio es diseñar y confeccionar para cuerpos y necesidades que no siempre encuentran respuesta en medidas convencionales, incluyendo ropa interior en talles exclusivos o especiales."
+  },
+  {
+    id: "faq-5",
+    question: "¿Cuánto tarda una prenda a medida?",
+    answer:
+      "Depende del tipo de trabajo (ajuste, transformación o prenda desde cero), la complejidad y la agenda del atelier. Al consultar por WhatsApp se acuerda un plazo realista según el pedido."
+  },
+  {
+    id: "faq-6",
+    question: "¿Hace vestuario para escena o eventos?",
+    answer:
+      "Sí. Diseña y realiza vestuario para espectáculos, teatro, danza y puestas en escena, además de prendas para ocasiones especiales."
   }
 ];

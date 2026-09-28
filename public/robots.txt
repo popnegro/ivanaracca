@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+# Rutas de estado de pago (no indexar)
+Disallow: /gracias
+Disallow: /pendiente
+Disallow: /error
+
 Sitemap: https://ivanaracca.vercel.app/sitemap.xml
