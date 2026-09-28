@@ -64,7 +64,7 @@ export function buildProductSchema(
   };
 }
 
-/** Graph for a product detail page: Breadcrumb + Product + FAQPage */
+/** Graph for a product detail page: WebPage + Breadcrumb + Product */
 export function buildProductPageGraph(product: CatalogItem): Record<string, unknown> {
   const pagePath = `/catalogo/${product.slug}`;
   const pageUrl = `${SITE_ORIGIN}${pagePath}`;
