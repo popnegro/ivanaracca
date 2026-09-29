@@ -1,11 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "rewrites": [
-    {
-      "source": "/((?!api/|eventos/?$|catalogo/(?:trucadoras|suspensores|ropa-interior)/?$|gracias/?$|pendiente/?$|error/?$|images/|favicon|robots\\.txt|sitemap\\.xml|llms\\.txt|apple-touch-icon|.*\\.(?:js|css|png|jpg|jpeg|webp|ico|svg|woff2?)).*)",
-      "destination": "/index.html"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
