@@ -110,10 +110,17 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
             <nav className="flex flex-col flex-1 divide-y divide-brand-brown/10 py-2" aria-label="Principal">
               {PRIMARY_NAV.map((link, idx) => (
-                <button
+                <a
                   key={link.label}
-                  type="button"
-                  onClick={() => handleNav(link.href, link.kind)}
+                  href={link.kind === 'route' ? link.href : '/' + link.href}
+                  onClick={(e) => {
+                    if (link.kind === 'hash') {
+                      e.preventDefault();
+                      handleNav(link.href, link.kind);
+                    } else {
+                      onClose();
+                    }
+                  }}
                   className="group flex items-baseline justify-between text-left py-4 text-brand-black hover:text-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-all duration-200"
                 >
                   <span className="font-serif text-2xl font-normal tracking-wide group-hover:translate-x-1.5 transition-transform duration-200">
@@ -125,7 +132,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   >
                     0{idx + 1}
                   </span>
-                </button>
+                </a>
               ))}
             </nav>
 
@@ -134,16 +141,23 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 Más
               </p>
               {SECONDARY_NAV.map((link) => (
-                <button
+                <a
                   key={link.label}
-                  type="button"
-                  onClick={() => handleNav(link.href, link.kind)}
+                  href={link.kind === 'route' ? link.href : '/' + link.href}
+                  onClick={(e) => {
+                    if (link.kind === 'hash') {
+                      e.preventDefault();
+                      handleNav(link.href, link.kind);
+                    } else {
+                      onClose();
+                    }
+                  }}
                   className="block w-full text-left py-2 font-serif text-base text-brand-black/70 hover:text-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown"
                 >
                   {link.label}
-                </button>
+                </a>
               ))}
-            </div>
+          </div>
 
             <div className="pt-6 border-t border-brand-brown/20 mt-4">
               <a
