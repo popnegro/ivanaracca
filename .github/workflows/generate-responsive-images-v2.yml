@@ -40,7 +40,7 @@ jobs:
 
             for width in 320 480 768; do
               output="public/images/${base}-${width}.webp"
-              magick "$input" \
+              convert "$input" \
                 -auto-orient \
                 -resize "${width}x>" \
                 -strip \
