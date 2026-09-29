@@ -221,6 +221,40 @@ export function getServerPageSeo(pathname: string): ServerPageSeo {
     };
   }
 
+  if (normalized === '/gracias' || normalized === '/pendiente' || normalized === '/error') {
+    const paymentSeo = {
+      '/gracias': {
+        title: 'Pago aprobado | Ivana Racca',
+        description: 'Tu pago fue recibido. Estamos preparando el comprobante de tu operación con Ivana Racca.',
+      },
+      '/pendiente': {
+        title: 'Pago pendiente | Ivana Racca',
+        description: 'Tu pago está en proceso de verificación. Consultá el estado de tu operación con Ivana Racca.',
+      },
+      '/error': {
+        title: 'Pago rechazado o cancelado | Ivana Racca',
+        description: 'No pudimos completar la operación. Podés volver a intentarlo o solicitar asistencia a Ivana Racca.',
+      },
+    }[normalized];
+
+    return {
+      title: paymentSeo.title,
+      description: paymentSeo.description,
+      canonicalPath: normalized,
+      imagePath: DEFAULT_OG_IMAGE,
+      imageAlt: 'Ivana Racca — Alta Costura y Diseño de Autor',
+      robots: 'noindex, follow',
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: paymentSeo.title,
+        description: paymentSeo.description,
+        url: `${SITE_ORIGIN}${normalized}`,
+        isPartOf: { '@id': WEBSITE_ID },
+      },
+    };
+  }
+
   if (normalized === '/eventos') {
     return {
       title: 'Eventos y prensa | Ivana Racca — Maipú, Mendoza',
