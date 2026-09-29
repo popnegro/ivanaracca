@@ -1,10 +1,9 @@
 name: Generate responsive image variants
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+  push:
     branches:
-      - main
+      - perf/responsive-images
 
 permissions:
   contents: write
@@ -15,6 +14,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Install ImageMagick
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
 
       - name: Generate WebP variants
         shell: bash
