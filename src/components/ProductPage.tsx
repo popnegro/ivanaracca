@@ -130,32 +130,6 @@ export default function ProductPage({ product }: Props) {
                   {product.intro}
                 </p>
               </div>
-
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a
-                  href={waHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleWhatsApp}
-                  className="flex-1 text-center px-6 py-4 bg-brand-black text-brand-white hover:bg-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-colors font-mono text-xs uppercase tracking-widest"
-                >
-                  Consultar por WhatsApp
-                </a>
-                <a
-                  href="/#catalogo"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigate('/');
-                    setTimeout(() => {
-                      document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' });
-                    }, 50);
-                  }}
-                  className="flex-1 text-center px-6 py-4 border border-brand-black text-brand-black hover:bg-brand-black hover:text-brand-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-colors font-mono text-xs uppercase tracking-widest"
-                >
-                  Ver catálogo
-                </a>
-              </div>
-
               <p className="font-sans text-sm text-brand-black/60 leading-relaxed">
                 Sin compra online. Precio y plazos se acuerdan en la consulta. Atención con cita
                 previa, lunes a viernes de 9 a 17 hs.
@@ -204,17 +178,6 @@ export default function ProductPage({ product }: Props) {
               </li>
             ))}
           </ol>
-          <div className="mt-12">
-            <a
-              href={waHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleWhatsApp}
-              className="inline-block px-8 py-4 bg-brand-black text-brand-white hover:bg-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-colors font-mono text-xs uppercase tracking-widest"
-            >
-              Empezar por WhatsApp
-            </a>
-          </div>
         </section>
 
         <section
