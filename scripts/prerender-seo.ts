@@ -3,12 +3,19 @@ import path from 'node:path';
 import { buildHeadHtml, getServerPageSeo } from '../src/utils/serverSeo';
 
 const DIST = path.resolve('dist');
+
+// Five canonical indexable routes plus three payment return routes.
+// Payment routes are prerendered only to keep external return URLs functional;
+// serverSeo marks them noindex, follow.
 const routes = [
   '/',
   '/eventos',
   '/catalogo/trucadoras',
   '/catalogo/suspensores',
   '/catalogo/ropa-interior',
+  '/gracias',
+  '/pendiente',
+  '/error',
 ];
 
 function injectRouteSeo(template: string, route: string): string {
@@ -17,16 +24,22 @@ function injectRouteSeo(template: string, route: string): string {
     /\n?  <script type="application\/ld\+json" id="server-seo-jsonld">[\s\S]*?<\/script>/,
     '',
   );
-  const schema = `  <script type="application/ld+json">\n  ${JSON.stringify(seo.jsonLd, null, 2).replace(/</g, '\\u003c')}\n  </script>`;
+  const schema = `  <script type="application/ld+json">
+  ${JSON.stringify(seo.jsonLd, null, 2).replace(/</g, '\\u003c')}
+  </script>`;
 
   return template
     .replace(
       /<!-- SEO_DYNAMIC_HEAD_START -->[\s\S]*?<!-- SEO_DYNAMIC_HEAD_END -->/,
-      `<!-- SEO_DYNAMIC_HEAD_START -->\n  ${dynamicHead}\n  <!-- SEO_DYNAMIC_HEAD_END -->`,
+      `<!-- SEO_DYNAMIC_HEAD_START -->
+  ${dynamicHead}
+  <!-- SEO_DYNAMIC_HEAD_END -->`,
     )
     .replace(
       /<!-- SEO_SCHEMA_START -->[\s\S]*?<!-- SEO_SCHEMA_END -->/,
-      `<!-- SEO_SCHEMA_START -->\n  ${schema}\n  <!-- SEO_SCHEMA_END -->`,
+      `<!-- SEO_SCHEMA_START -->
+  ${schema}
+  <!-- SEO_SCHEMA_END -->`,
     );
 }
 
@@ -40,4 +53,4 @@ for (const route of routes) {
   await writeFile(path.join(outputDir, 'index.html'), html, 'utf8');
 }
 
-console.log(`SEO prerendered ${routes.length} indexable routes into dist/.`);
+console.log(`SEO prerendered ${routes.length} routes into dist/ (5 indexable + 3 noindex payment routes).`);
