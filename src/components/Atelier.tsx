@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import SectionHeader from './SectionHeader';
+import { getResponsiveImageProps } from '../utils/responsiveImages';
 
 export default function Atelier() {
   const shouldReduceMotion = useReducedMotion();
@@ -62,9 +63,12 @@ export default function Atelier() {
             <div className="aspect-[3/4] w-full max-w-md mx-auto overflow-hidden bg-brand-ivory border border-brand-brown/10 shadow-xs">
               <img
                 src="/images/ivana-racca-atelier.webp"
+                {...getResponsiveImageProps("/images/ivana-racca-atelier.webp")}
                 alt="Retrato de Ivana Racca en su taller, trabajando en un diseño a medida"
                 className="w-full h-full object-cover grayscale transition-transform duration-700 hover:scale-102"
                 loading="lazy"
+                width={896}
+                height={1195}
               />
             </div>
           </motion.div>
