@@ -1,9 +1,10 @@
 name: Generate responsive image variants
 
 on:
-  push:
+  pull_request:
+    types: [opened, synchronize, reopened]
     branches:
-      - perf/responsive-images
+      - main
 
 permissions:
   contents: write
