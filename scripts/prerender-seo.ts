@@ -18,6 +18,12 @@ const routes = [
   '/error',
 ];
 
+const paymentFallbacks: Record<string, string> = {
+  '/gracias': '<main><h1>Pago aprobado</h1><p>Tu pago fue recibido. Cargando el comprobante del Atelier de Ivana Racca…</p></main>',
+  '/pendiente': '<main><h1>Pago pendiente</h1><p>Tu pago está en proceso de verificación. Cargando el estado de la operación…</p></main>',
+  '/error': '<main><h1>Pago rechazado o cancelado</h1><p>No pudimos completar la operación. Cargando las opciones de asistencia…</p></main>',
+};
+
 function injectRouteSeo(template: string, route: string): string {
   const seo = getServerPageSeo(route);
   const dynamicHead = buildHeadHtml(seo).replace(
@@ -40,6 +46,12 @@ function injectRouteSeo(template: string, route: string): string {
       `<!-- SEO_SCHEMA_START -->
   ${schema}
   <!-- SEO_SCHEMA_END -->`,
+    )
+    .replace(
+      '<div id="root"></div>',
+      paymentFallbacks[route]
+        ? `<div id="root">${paymentFallbacks[route]}</div>`
+        : '<div id="root"></div>',
     );
 }
 
