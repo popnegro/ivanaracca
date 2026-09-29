@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useReducedMotion } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { getResponsiveImageProps } from '../utils/responsiveImages';
 
 const carouselImages = [
   {
@@ -145,6 +146,7 @@ export default function ImageCarousel() {
           <img
             key={item.src}
             src={item.src}
+            {...getResponsiveImageProps(item.src, "(max-width: 767px) 100vw, 40vw")}
             alt={item.alt}
             className={`absolute inset-0 w-full h-full object-cover ${
               shouldReduceMotion ? '' : 'transition-opacity duration-300'
