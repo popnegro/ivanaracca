@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import { getResponsiveImageProps } from '../utils/responsiveImages';
 
 interface CollectionSliderProps {
   images: string[];
@@ -139,6 +140,7 @@ export default function CollectionSlider({
         <motion.img
           key={currentIndex}
           src={currentImage}
+          {...getResponsiveImageProps(currentImage)}
           alt={`${name} — ${category} por Ivana Racca (foto ${currentIndex + 1} de ${totalSlides})`}
           className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02] ${
             loadedImages[currentIndex] ? 'opacity-100' : 'opacity-0'
