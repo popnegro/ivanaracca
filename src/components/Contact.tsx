@@ -61,16 +61,6 @@ export default function Contact() {
               >
                 HABLAR CON IVANA
               </a>
-
-              <a
-                href="https://www.instagram.com/ivanaracca/"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={handleInstagramClick}
-                className="px-8 py-4 border border-brand-black text-brand-black hover:bg-brand-black hover:text-brand-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-all font-mono text-xs uppercase tracking-widest text-center"
-              >
-                SEGUIR EN INSTAGRAM
-              </a>
             </motion.div>
           </div>
 

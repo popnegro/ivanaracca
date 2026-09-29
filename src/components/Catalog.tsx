@@ -84,23 +84,14 @@ export default function Catalog() {
 
               <div className="pt-2 space-y-2">
                 <a
-                  href={getWhatsAppUrl(item.whatsappMessage)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => handleItemClick(item.name, item.id)}
-                  className="block w-full text-center px-4 py-3 bg-brand-black text-brand-white hover:bg-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-all font-mono text-xs uppercase tracking-widest"
-                >
-                  Consultar este producto
-                </a>
-                <a
                   href={`/catalogo/${item.slug}`}
                   onClick={(e) => {
                     e.preventDefault();
                     navigate(`/catalogo/${item.slug}`);
                   }}
-                  className="block w-full text-center px-4 py-2.5 border border-brand-black/20 text-brand-black/80 hover:border-brand-black hover:text-brand-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-all font-mono text-[10px] uppercase tracking-widest"
+                  className="block w-full text-center px-4 py-3 bg-brand-black text-brand-white hover:bg-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-all font-mono text-xs uppercase tracking-widest"
                 >
-                  Ver ficha completa
+                  Ver producto
                 </a>
               </div>
             </motion.div>

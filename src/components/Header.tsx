@@ -19,11 +19,10 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-          isScrolled
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled
             ? 'bg-brand-ivory/95 border-b border-brand-brown/10 py-4 shadow-xs backdrop-blur-md'
             : 'bg-transparent py-6'
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-20 flex justify-between items-center">
           <a
@@ -70,7 +69,7 @@ export default function Header() {
               }
               className="px-5 py-2.5 border border-brand-black text-brand-black hover:bg-brand-black hover:text-brand-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-all font-mono text-xs uppercase tracking-widest"
             >
-              Hablar
+              RESERVAR CITA
             </a>
           </div>
 

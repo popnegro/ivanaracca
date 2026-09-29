@@ -161,7 +161,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 }}
                 className="block w-full text-center px-4 py-3 bg-brand-black text-brand-white hover:bg-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-colors font-mono text-xs uppercase tracking-widest"
               >
-                Hablar con Ivana
+                Reservar Cita
               </a>
             </div>
           </motion.div>

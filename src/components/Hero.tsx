@@ -54,17 +54,13 @@ export default function Hero() {
               onClick={handleScrollToCollection}
               className="px-8 py-4 bg-brand-black text-brand-white hover:bg-brand-brown focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-all font-mono text-xs uppercase tracking-widest text-center"
             >
-              VER COLECCIÓN
+              CONOCER COLECCIÓN
             </a>
-
             <a
-              href={getWhatsAppUrl("Hola Ivana, quiero hablar con vos sobre una prenda o diseño.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackWhatsAppClick('hero_primary', 'Hola Ivana, quiero hablar con vos sobre una prenda o diseño.')}
+              href="/eventos"
               className="px-8 py-4 border border-brand-black text-brand-black hover:bg-brand-black hover:text-brand-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2 transition-all font-mono text-xs uppercase tracking-widest text-center"
             >
-              HABLAR CON IVANA
+              VER DISEÑOS PARA EVENTOS
             </a>
           </div>
         </motion.div>
