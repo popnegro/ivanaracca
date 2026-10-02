@@ -317,7 +317,7 @@ export function buildHeadHtml(seo: ServerPageSeo): string {
     `<meta name="twitter:image" content="${escapeHtml(image)}" />`,
     `<meta name="twitter:image:alt" content="${escapeHtml(seo.imageAlt)}" />`,
     `<script type="application/ld+json" id="server-seo-jsonld">${jsonLd}</script>`,
-  ].join('\\n  ');
+  ].join('\n  ');
 }
 
 function escapeHtml(value: string): string {
